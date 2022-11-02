@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/providers.dart';
-import 'screens/add_item/add_item.dart';
+import 'screens/add_item/add_item_screen.dart';
 import 'screens/screens.dart';
 
 void main() {

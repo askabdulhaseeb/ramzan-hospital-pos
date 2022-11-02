@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../models/item/item_category.dart';
-import '../models/item/item_sub_category.dart';
+import '../../models/item/item_category.dart';
+import '../../models/item/item_sub_category.dart';
+
 
 class ItemCatProvider extends ChangeNotifier {
   ItemCategory? _selectedCat;

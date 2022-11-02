@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
 
-import 'item_category_provider.dart';
-import 'item_provider.dart';
+import 'item/item_category_provider.dart';
+import 'item/item_provider.dart';
 
 // ignore: always_specify_types
 dynamic get listOfProvider => [
