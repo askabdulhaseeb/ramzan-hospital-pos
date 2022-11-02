@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../models/item/item_category.dart';
 import '../models/item/item_sub_category.dart';
 
-
 class ItemCatProvider extends ChangeNotifier {
   ItemCategory? _selectedCat;
   List<ItemSubCategory> _subCategory = <ItemSubCategory>[];
@@ -54,14 +53,16 @@ class ItemCatProvider extends ChangeNotifier {
   ItemCategory? get selectedCategroy => _selectedCat;
   ItemSubCategory? get selectedSubCategory => _selectedSubCat;
 
-  void updateCatSelection(ItemCategory updatedCategroy) {
+  void updateCatSelection(ItemCategory? updatedCategroy) {
     _selectedCat = updatedCategroy;
-    _subCategory = updatedCategroy.subCategories;
+    _subCategory = updatedCategroy == null
+        ? <ItemSubCategory>[]
+        : updatedCategroy.subCategories;
     _selectedSubCat = null;
     notifyListeners();
   }
 
-  void updateSubCategorySection(ItemSubCategory update) {
+  void updateSubCategorySection(ItemSubCategory? update) {
     _selectedSubCat = update;
     notifyListeners();
   }
