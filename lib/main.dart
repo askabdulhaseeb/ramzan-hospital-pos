@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'providers/providers.dart';
+import 'screens/add_item/add_item.dart';
 import 'screens/screens.dart';
 
 void main() {
@@ -11,15 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ramzan Hospital',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: listOfProvider,
+      child: MaterialApp(
+        title: 'Ramzan Hospital',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const AddItemScreen(),
+        routes: registeredRoutes,
       ),
-      home: const AddItemScreen(),
-      routes: <String, WidgetBuilder>{
-        AddItemScreen.routeName: (_) => const AddItemScreen(),
-      },
     );
   }
 }
