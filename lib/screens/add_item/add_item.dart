@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+
+import '../../widgets/custom_widgets/custom_board_widget.dart';
+import '../../widgets/custom_widgets/custom_title_textformfield.dart';
+import '../../widgets/item/dropdowns/line_item_dropdown.dart';
+
+class AddItemScreen extends StatefulWidget {
+  const AddItemScreen({Key? key}) : super(key: key);
+  static const String routeName = '/add-product';
+
+  @override
+  State<AddItemScreen> createState() => _AddItemScreenState();
+}
+
+class _AddItemScreenState extends State<AddItemScreen> {
+  final TextEditingController _barcode = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('AddItemScreen')),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            CustomBoardWidget(
+              title: 'Basic Info',
+              width: 420,
+              child: Column(
+                children: <Widget>[
+                  const LineItemDropdown(),
+                  CustomTitleTextFormField(
+                    controller: _barcode,
+                    title: 'Item Code',
+                  ),
+                  CustomTitleTextFormField(
+                    controller: _name,
+                    title: 'Item Name',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

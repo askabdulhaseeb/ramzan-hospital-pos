@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/screens.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,7 +16,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(body: Center(child: Text('init'))),
+      home: const AddItemScreen(),
+      routes: <String, WidgetBuilder>{
+        AddItemScreen.routeName: (_) => const AddItemScreen(),
+      },
     );
   }
 }
