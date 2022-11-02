@@ -35,8 +35,8 @@ class CustomValidator {
     return (value!.length < 5) ? 'Enter more then 4 characters' : null;
   }
 
-  static String? greaterThen(String? input, double compairWith) {
-    return (double.parse(input ?? '0') < compairWith)
+  static String? greaterThen(String? input, String? compairWith) {
+    return (double.parse(input ?? '0') < double.parse(compairWith ?? '0'))
         ? 'New input must be greater'
         : null;
   }
