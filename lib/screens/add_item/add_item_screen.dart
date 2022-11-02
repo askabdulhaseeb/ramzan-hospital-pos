@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/custom_widgets/custom_board_widget.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/item/dropdowns/item_cat_dropdown.dart';
+import '../../widgets/item/dropdowns/item_formula_dropdown.dart';
 import '../../widgets/item/dropdowns/item_sub_cat_dropdown.dart';
 import '../../widgets/item/dropdowns/line_item_dropdown.dart';
 
@@ -49,14 +50,10 @@ class _AddItemScreenState extends State<AddItemScreen> {
                 title: 'About Item',
                 width: 420,
                 child: Column(
-                  children: <Widget>[
-                    const ItemCatDropdown(),
-                    const SizedBox(height: 6),
-                    const ItemSubCatDropdown(),
-                    CustomTitleTextFormField(
-                      controller: _name,
-                      title: 'Item Name',
-                    ),
+                  children: const <Widget>[
+                    ItemCatDropdown(),
+                    ItemSubCatDropdown(),
+                    ItemFormulaDropdown(),
                   ],
                 ),
               ),
