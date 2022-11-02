@@ -2,14 +2,12 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/item/item_category.dart';
-import '../../../models/item/item_formula.dart';
-import '../../../providers/item/item_category_provider.dart';
-import '../../../providers/item/item_formula_provider.dart';
+import '../../../models/item/item_supplier.dart';
+import '../../../providers/item/item_supplier_provider.dart';
 import '../../../utilities/utilities.dart';
 
-class ItemFormulaDropdown extends StatelessWidget {
-  const ItemFormulaDropdown({super.key});
+class ItemSupplierDropdown extends StatelessWidget {
+  const ItemSupplierDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,41 +16,41 @@ class ItemFormulaDropdown extends StatelessWidget {
         SizedBox(
           width: Utlities.titleWidth,
           child: Text(
-            'Formula',
+            'Supplier',
             style: Utlities.itemTitleTextStyle,
           ),
         ),
         Expanded(
-          child: Consumer<ItemFormulaProvider>(builder:
-              (BuildContext context, ItemFormulaProvider formulaPro, _) {
-            final List<ItemFormula> formulas = formulaPro.formulas;
+          child: Consumer<ItemSupplierProvider>(builder:
+              (BuildContext context, ItemSupplierProvider supplierPro, _) {
+            final List<ItemSupplier> supp = supplierPro.suppliers;
             return Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-              child: DropdownFormField<ItemFormula>(
+              child: DropdownFormField<ItemSupplier>(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText: 'Formula',
+                  labelText: 'Supplier',
                 ),
-                onChanged: (dynamic str) => formulaPro.onFormulaUpdate(str),
+                onChanged: (dynamic str) => supplierPro.onSupplierUpdate(str),
                 validator: (dynamic str) {
-                  if (formulaPro.selectedFormula == null) {
-                    return 'Select Formula';
+                  if (supplierPro.selectedSupplier == null) {
+                    return 'Select Supplier';
                   }
                   return null;
                 },
                 displayItemFn: (dynamic value) => Text(
-                  value?.formula ?? '',
+                  value?.name ?? '',
                   style: const TextStyle(fontSize: 16),
                 ),
-                findFn: (dynamic str) async => formulas,
+                findFn: (dynamic str) async => supp,
                 filterFn: (dynamic value, String str) =>
-                    value.formula.toLowerCase().indexOf(str.toLowerCase()) >= 0,
+                    value.name.toLowerCase().indexOf(str.toLowerCase()) >= 0,
                 dropdownItemFn: (dynamic value, int position, bool focused,
                         dynamic lastSelectedItem, dynamic onTap) =>
                     ListTile(
-                  title: Text(value.formula),
+                  title: Text(value.name),
                   onTap: onTap,
                 ),
               ),
