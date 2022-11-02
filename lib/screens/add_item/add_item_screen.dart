@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/custom_widgets/custom_board_widget.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
-import '../../widgets/item/dropdowns/item_cat_dropdown.dart';
-import '../../widgets/item/dropdowns/item_formula_dropdown.dart';
-import '../../widgets/item/dropdowns/item_manufacturer_dropdown.dart';
-import '../../widgets/item/dropdowns/item_sub_cat_dropdown.dart';
-import '../../widgets/item/dropdowns/item_supplier_dropdown.dart';
-import '../../widgets/item/dropdowns/line_item_dropdown.dart';
+import '../../widgets/item/dropdowns/item_dropdowns.dart';
 
 class AddItemScreen extends StatefulWidget {
   const AddItemScreen({Key? key}) : super(key: key);
