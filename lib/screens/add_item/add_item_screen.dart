@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/custom_widgets/custom_board_widget.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
+import '../../widgets/custom_widgets/icon_button.dart';
 import '../../widgets/item/dropdowns/item_dropdowns.dart';
 
 class AddItemScreen extends StatefulWidget {
@@ -24,81 +25,107 @@ class _AddItemScreenState extends State<AddItemScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('AddItemScreen')),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
-          child: Row(
+          child: Column(
             children: <Widget>[
-              Column(
+              Row(
                 children: <Widget>[
-                  // BASIC
-                  CustomBoardWidget(
-                    title: 'Basic Info',
-                    width: 420,
-                    child: Column(
-                      children: <Widget>[
-                        const LineItemDropdown(),
-                        CustomTitleTextFormField(
-                          controller: _barcode,
-                          title: 'Item Code',
+                  Column(
+                    children: <Widget>[
+                      // BASIC
+                      CustomBoardWidget(
+                        title: 'Basic Info',
+                        width: 420,
+                        child: Column(
+                          children: <Widget>[
+                            const LineItemDropdown(),
+                            CustomTitleTextFormField(
+                              controller: _barcode,
+                              title: 'Item Code',
+                            ),
+                            CustomTitleTextFormField(
+                              controller: _name,
+                              title: 'Item Name',
+                            ),
+                          ],
                         ),
-                        CustomTitleTextFormField(
-                          controller: _name,
-                          title: 'Item Name',
+                      ),
+                      // INFO
+                      CustomBoardWidget(
+                        title: 'About Item',
+                        width: 420,
+                        child: Column(
+                          children: const <Widget>[
+                            ItemCatDropdown(),
+                            ItemSubCatDropdown(),
+                            ItemFormulaDropdown(),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  // INFO
-                  CustomBoardWidget(
-                    title: 'About Item',
-                    width: 420,
-                    child: Column(
-                      children: const <Widget>[
-                        ItemCatDropdown(),
-                        ItemSubCatDropdown(),
-                        ItemFormulaDropdown(),
-                      ],
-                    ),
+                  const SizedBox(width: 20),
+                  // Source
+                  Column(
+                    children: <Widget>[
+                      CustomBoardWidget(
+                        title: 'Source',
+                        width: 420,
+                        child: Column(
+                          children: const <Widget>[
+                            ItemManufacturerDropdown(),
+                            ItemSupplierDropdown(),
+                          ],
+                        ),
+                      ),
+                      CustomBoardWidget(
+                        title: 'Pricing (Per Unit)',
+                        width: 420,
+                        child: Column(
+                          children: <Widget>[
+                            CustomTitleTextFormField(
+                              controller: _qty,
+                              title: 'Item Quantity',
+                            ),
+                            CustomTitleTextFormField(
+                              controller: _averagePrice,
+                              title: 'Average Price',
+                            ),
+                            CustomTitleTextFormField(
+                              controller: _salePrice,
+                              title: 'Sale Price',
+                            ),
+                            CustomTitleTextFormField(
+                              controller: _discount,
+                              title: 'Discount',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              const SizedBox(width: 20),
-              // Source
-              Column(
+              const SizedBox(height: 32),
+              Row(
                 children: <Widget>[
-                  CustomBoardWidget(
-                    title: 'Source',
-                    width: 420,
-                    child: Column(
-                      children: const <Widget>[
-                        ItemManufacturerDropdown(),
-                        ItemSupplierDropdown(),
-                      ],
-                    ),
+                  const SizedBox(width: 320),
+                  CustomIconButton(
+                    title: 'Add',
+                    icon: Icons.add,
+                    onTap: () {},
                   ),
-                  CustomBoardWidget(
-                    title: 'Pricing (Per Unit)',
-                    width: 420,
-                    child: Column(
-                      children: <Widget>[
-                        CustomTitleTextFormField(
-                          controller: _qty,
-                          title: 'Item Quantity',
-                        ),
-                        CustomTitleTextFormField(
-                          controller: _averagePrice,
-                          title: 'Average Price',
-                        ),
-                        CustomTitleTextFormField(
-                          controller: _salePrice,
-                          title: 'Sale Price',
-                        ),
-                        CustomTitleTextFormField(
-                          controller: _discount,
-                          title: 'Discount',
-                        ),
-                      ],
+                  const SizedBox(width: 20),
+                  CustomIconButton(
+                    title: 'Remove',
+                    icon: Icons.remove,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16,
                     ),
+                    bgColor: Colors.red,
+                    onTap: () {},
                   ),
                 ],
               ),
