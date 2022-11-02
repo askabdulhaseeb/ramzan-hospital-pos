@@ -23,8 +23,27 @@ class _AddItemScreenState extends State<AddItemScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
+            // BASIC
             CustomBoardWidget(
               title: 'Basic Info',
+              width: 420,
+              child: Column(
+                children: <Widget>[
+                  const LineItemDropdown(),
+                  CustomTitleTextFormField(
+                    controller: _barcode,
+                    title: 'Item Code',
+                  ),
+                  CustomTitleTextFormField(
+                    controller: _name,
+                    title: 'Item Name',
+                  ),
+                ],
+              ),
+            ),
+            // INFO
+            CustomBoardWidget(
+              title: 'About Item',
               width: 420,
               child: Column(
                 children: <Widget>[
