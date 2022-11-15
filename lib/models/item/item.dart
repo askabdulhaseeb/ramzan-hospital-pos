@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Item {
@@ -59,13 +56,13 @@ class Item {
       code: doc.data()?['code'] ?? '',
       line: doc.data()?['line'] ?? '',
       category: doc.data()?['category'] ?? '',
-      subCategory: doc.data()?['subCategory'] ?? '',
+      subCategory: doc.data()?['sub_category'] ?? '',
       formula: doc.data()?['formula'] ?? '',
       manufacturer: doc.data()?['manufacturer'] ?? '',
       supplier: doc.data()?['supplier'] ?? '',
       quantity: doc.data()?['quantity'] ?? 0,
-      averagePrice: doc.data()?['averagePrice'] ?? 0,
-      salePrice: doc.data()?['salePrice'] ?? 0,
+      averagePrice: doc.data()?['average_price'] ?? 0,
+      salePrice: doc.data()?['sale_price'] ?? 0,
       discount: doc.data()?['discount'] ?? 0,
     );
   }

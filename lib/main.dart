@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'providers/providers.dart';
 import 'screens/add_item/add_item_screen.dart';
+import 'screens/sale_screen/sale_screen.dart';
 import 'screens/screens.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const AddItemScreen(),
+        home: const SaleScreen(),
         routes: registeredRoutes,
       ),
     );

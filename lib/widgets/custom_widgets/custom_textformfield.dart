@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     TextEditingController? controller,
+    this.width,
     this.keyboardType,
     this.textInputAction,
     this.onChanged,
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatefulWidget {
   })  : _controller = controller,
         super(key: key);
   final TextEditingController? _controller;
+  final double? width;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final void Function(String)? onChanged;
@@ -63,6 +65,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: widget.width,
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding:
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
