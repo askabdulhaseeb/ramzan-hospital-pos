@@ -57,7 +57,7 @@ class SaleScreen extends StatelessWidget {
                         ) {
                           return Row(
                             children: <Widget>[
-                              const Text('saleman'),
+                              const Text('salesman'),
                               const SizedBox(width: 10),
                               TitleTextFormField(
                                 controller: salePro.defaultQuantity,
