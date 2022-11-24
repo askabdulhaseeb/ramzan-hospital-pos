@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: listOfProvider,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Ramzan Hospital',
         theme: ThemeData(
           primarySwatch: Colors.blue,
