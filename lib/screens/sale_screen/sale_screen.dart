@@ -5,11 +5,20 @@ import '../../providers/item/item_provider.dart';
 import '../../providers/sale_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
+import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
 
-class SaleScreen extends StatelessWidget {
+class SaleScreen extends StatefulWidget {
   const SaleScreen({Key? key}) : super(key: key);
   static const String routeName = '/sale-screen';
+
+  @override
+  State<SaleScreen> createState() => _SaleScreenState();
+}
+
+class _SaleScreenState extends State<SaleScreen> {
+  TextEditingController _barcode = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,13 +75,92 @@ class SaleScreen extends StatelessWidget {
                                 validator: (String? value) =>
                                     CustomValidator.isEmpty(value),
                               ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              CustomTextFormField(
+                                width: 140,
+                                height: 35,
+                                hint: 'barcode add',
+                                controller: _barcode,
+                                color: Colors.white,
+                              ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.save,
+                                  color: Colors.grey,
+                                ),
+                              )
                             ],
                           );
                         }),
                       ],
                     ),
                   ),
-                  Expanded(child: Container(color: Colors.amber)),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        DataTable(
+                          dividerThickness: 3,
+                          columns: const <DataColumn>[
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Name',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Name',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Name',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Age',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Expanded(
+                                child: Text(
+                                  'Role',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                            ),
+                          ],
+                          rows: const <DataRow>[
+                            DataRow(
+                              cells: <DataCell>[
+                                DataCell(Text('Sarah')),
+                                DataCell(Text('Sarah')),
+                                DataCell(Text('Sarah')),
+                                DataCell(Text('19')),
+                                DataCell(Text('Student')),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   const SaleButtonSide(),
                 ],
               ),

@@ -5,6 +5,7 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     TextEditingController? controller,
     this.width,
+    this.height,
     this.keyboardType,
     this.textInputAction,
     this.onChanged,
@@ -27,6 +28,7 @@ class CustomTextFormField extends StatefulWidget {
         super(key: key);
   final TextEditingController? _controller;
   final double? width;
+  final double? height;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final void Function(String)? onChanged;
@@ -66,11 +68,12 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
+      height: widget.height,
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding:
           widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(4),
         color: widget.color ??
             Theme.of(context).textTheme.bodyText1!.color!.withOpacity(0.15),
         border: Border.all(color: Colors.grey),
@@ -84,9 +87,10 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             : widget.maxLines! > 1
                 ? TextInputType.multiline
                 : widget.keyboardType ?? TextInputType.text,
-        textInputAction: widget.maxLines! > 1
-            ? TextInputAction.newline
-            : widget.textInputAction ?? TextInputAction.next,
+        // textInputAction: widget.maxLines! > 1
+        //     ? TextInputAction.newline
+        //     : widget.textInputAction ?? TextInputAction.next,
+        textInputAction: TextInputAction.go,
         autofocus: widget.autoFocus,
         textAlign: widget.textAlign,
         onChanged: widget.onChanged,
