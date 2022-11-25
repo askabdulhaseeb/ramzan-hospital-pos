@@ -7,6 +7,7 @@ import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
+import '../../widgets/data_table/custom_data_table.dart';
 
 class SaleScreen extends StatefulWidget {
   const SaleScreen({Key? key}) : super(key: key);
@@ -98,68 +99,8 @@ class _SaleScreenState extends State<SaleScreen> {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        DataTable(
-                          dividerThickness: 3,
-                          columns: const <DataColumn>[
-                            DataColumn(
-                              label: Expanded(
-                                child: Text(
-                                  'Name',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Expanded(
-                                child: Text(
-                                  'element',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Expanded(
-                                child: Text(
-                                  'Name',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Expanded(
-                                child: Text(
-                                  'Age',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Expanded(
-                                child: Text(
-                                  'Role',
-                                  style: TextStyle(fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            ),
-                          ],
-                          rows: const <DataRow>[
-                            DataRow(
-                              cells: <DataCell>[
-                                DataCell(Text('Sarah')),
-                                DataCell(Text('Sarah')),
-                                DataCell(Text('Sarah')),
-                                DataCell(Text('19')),
-                                DataCell(Text('Student')),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  const Expanded(
+                    child: CustomDataTable(),
                   ),
                   const SaleButtonSide(),
                 ],
