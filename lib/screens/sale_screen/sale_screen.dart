@@ -116,7 +116,7 @@ class _SaleScreenState extends State<SaleScreen> {
                             DataColumn(
                               label: Expanded(
                                 child: Text(
-                                  'Name',
+                                  'element',
                                   style: TextStyle(fontStyle: FontStyle.italic),
                                 ),
                               ),
