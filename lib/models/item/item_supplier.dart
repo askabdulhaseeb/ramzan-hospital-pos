@@ -17,10 +17,10 @@ class ItemSupplier {
   }
 
   // ignore: sort_constructors_first
-  factory ItemSupplier.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory ItemSupplier.fromMap(Map<String, dynamic> map) {
     return ItemSupplier(
-      id: doc.data()?['id'] ?? '',
-      name: doc.data()?['name'] ?? '',
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
     );
   }
 }

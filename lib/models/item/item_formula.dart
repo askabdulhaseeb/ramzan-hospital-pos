@@ -17,10 +17,10 @@ class ItemFormula {
   }
 
   // ignore: sort_constructors_first
-  factory ItemFormula.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory ItemFormula.fromMap(Map<String, dynamic> map) {
     return ItemFormula(
-      id: doc.data()?['id'] ?? '',
-      formula: doc.data()?['formula'] ?? '',
+      id: map['id'] ?? '',
+      formula: map['formula'] ?? '',
     );
   }
 }
