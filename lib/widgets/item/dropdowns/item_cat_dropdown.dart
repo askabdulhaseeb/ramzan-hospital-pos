@@ -57,6 +57,31 @@ class ItemCatDropdown extends StatelessWidget {
             );
           }),
         ),
+        IconButton(
+            onPressed: () {
+              print('icon button pressed');
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('AlertDialog Title'),
+                  content: const Text('AlertDialog description'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            splashRadius: 16,
+            icon: const Icon(
+              Icons.add_box_rounded,
+            ))
       ],
     );
   }

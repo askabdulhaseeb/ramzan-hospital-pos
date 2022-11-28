@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SaleScreen(),
+        home: const AddItemScreen(),
         routes: registeredRoutes,
       ),
     );

@@ -49,21 +49,21 @@ class Item {
     };
   }
 
-  factory Item.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: doc.data()?['id'] ?? '',
-      name: doc.data()?['name'] ?? '',
-      code: doc.data()?['code'] ?? '',
-      line: doc.data()?['line'] ?? '',
-      category: doc.data()?['category'] ?? '',
-      subCategory: doc.data()?['sub_category'] ?? '',
-      formula: doc.data()?['formula'] ?? '',
-      manufacturer: doc.data()?['manufacturer'] ?? '',
-      supplier: doc.data()?['supplier'] ?? '',
-      quantity: doc.data()?['quantity'] ?? 0,
-      averagePrice: doc.data()?['average_price'] ?? 0,
-      salePrice: doc.data()?['sale_price'] ?? 0,
-      discount: doc.data()?['discount'] ?? 0,
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      code: map['code'] ?? '',
+      line: map['line'] ?? '',
+      category: map['category'] ?? '',
+      subCategory: map['sub_category'] ?? '',
+      formula: map['formula'] ?? '',
+      manufacturer: map['manufacturer'] ?? '',
+      supplier: map['supplier'] ?? '',
+      quantity: map['quantity'] ?? 0,
+      averagePrice: map['average_price'] ?? 0,
+      salePrice: map['sale_price'] ?? 0,
+      discount: map['discount'] ?? 0,
     );
   }
 }
