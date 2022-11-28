@@ -22,12 +22,11 @@ class ItemCategory {
   }
 
   // ignore: sort_constructors_first
-  factory ItemCategory.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory ItemCategory.fromDoc(Map<String, dynamic> map) {
     return ItemCategory(
-      catID: doc.data()!['cat_id'] ?? '',
-      title: doc.data()!['title'] ?? '',
-      subCategories: List<ItemSubCategory>.from(doc
-          .data()!['sub_categories']
+      catID: map['cat_id'] ?? '',
+      title: map['title'] ?? '',
+      subCategories: List<ItemSubCategory>.from(map['sub_categories']
           ?.map((Map<String, dynamic> x) => ItemSubCategory.fromMap(x))),
     );
   }

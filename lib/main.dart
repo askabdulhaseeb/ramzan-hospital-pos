@@ -1,3 +1,4 @@
+import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,7 +7,11 @@ import 'screens/add_item/add_item_screen.dart';
 import 'screens/sale_screen/sale_screen.dart';
 import 'screens/screens.dart';
 
+const apiKey = 'AIzaSyBqcG1lPhbYwfTbcoOgFkOhbntIH81oTTo';
+const projectID = 'ramzan-hospital-qds';
 void main() {
+  Firestore.initialize(projectID);
+  FirebaseAuth.initialize(apiKey, VolatileStore());
   runApp(const MyApp());
 }
 
