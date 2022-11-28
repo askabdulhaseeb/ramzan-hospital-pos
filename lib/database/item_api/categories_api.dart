@@ -3,7 +3,7 @@ import 'package:firedart/firedart.dart';
 import '../../models/item/item_category.dart';
 import '../../widgets/custom_widgets/custom_toast.dart';
 
-class PatientAPI {
+class CategoriesAPI {
   CollectionReference collection = Firestore.instance.collection('categories');
 
   Future<bool> add(ItemCategory value) async {
@@ -18,7 +18,7 @@ class PatientAPI {
     }
   }
 
-  Future<List<ItemCategory>> getPatient() async {
+  Future<List<ItemCategory>> get() async {
     List<ItemCategory> value = <ItemCategory>[];
     List<Document> lis = (await collection.get());
     for (int i = 0; i < lis.length; i++) {
