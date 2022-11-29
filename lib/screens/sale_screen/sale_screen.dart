@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/item/item.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/sale_provider.dart';
 import '../../providers/user_provider.dart';
@@ -19,6 +20,7 @@ class SaleScreen extends StatefulWidget {
 
 class _SaleScreenState extends State<SaleScreen> {
   TextEditingController _barcode = TextEditingController();
+  TextEditingController _quantity = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class _SaleScreenState extends State<SaleScreen> {
                               const Text('salesman'),
                               const SizedBox(width: 10),
                               TitleTextFormField(
-                                controller: salePro.defaultQuantity,
+                                controller: _quantity,
                                 title: 'Qty',
                                 width: 100,
                                 validator: (String? value) =>
@@ -87,7 +89,27 @@ class _SaleScreenState extends State<SaleScreen> {
                                 color: Colors.white,
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Item? item1 = itemPro.item(_barcode.text);
+                                  print(item1);
+                                  print(item1?.name ?? 'no name');
+                                  if (item1 == null) {
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text('No item Found'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                context, 'Cancel'),
+                                            child: const Text('Cancel'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                },
                                 icon: const Icon(
                                   Icons.save,
                                   color: Colors.grey,

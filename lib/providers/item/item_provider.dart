@@ -7,10 +7,10 @@ class ItemProvider extends ChangeNotifier {
   ItemProvider() {
     _load();
   }
-  Item item(String codeValue) {
+  Item? item(String codeValue) {
     final int index =
         _items.indexWhere((Item element) => element.code == codeValue);
-    return index < 0 ? _null : _items[index];
+    return index < 0 ? null : _items[index];
   }
 
   List<Item> _items = <Item>[];
