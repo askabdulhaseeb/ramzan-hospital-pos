@@ -17,9 +17,20 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  final List<CartItem> _cartItems = <CartItem>[];
+  void onDiscountUpdate(String str, int index) {
+   // final int index = _indexOfSelectedIndex(value.id);
+    double a = double.parse(str);
+    _cartItems[index].discount = a;
+    notifyListeners();
+  }
+
+  int _indexOfSelectedIndex(String item1) {
+    return _items.indexWhere((Item element) => element.id == item1);
+  }
+
+   List<CartItem> _cartItems = <CartItem>[];
   List<CartItem> get cartItem => _cartItems;
 
-  final List<Item> _items = <Item>[];
+   List<Item> _items = <Item>[];
   List<Item> get item => _items;
 }

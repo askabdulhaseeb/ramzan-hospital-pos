@@ -82,7 +82,26 @@ class _CustomDataTableState extends State<CustomDataTable> {
                       DataCell(Text(
                         cartPro.cartItem[index].price.toString(),
                       )),
-                      const DataCell(TextField()),
+                      DataCell(
+                        SizedBox(
+                          width: 40,
+                          child: TextField(
+                              decoration: InputDecoration(
+                                hintText:
+                                    cartPro.cartItem[index].discount.toString(),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                              ),
+                              onChanged: (String value) {
+                                if (value.isEmpty) {
+                                  cartPro.onDiscountUpdate('0', index);
+                                } else {
+                                  cartPro.onDiscountUpdate(value, index);
+                                }
+                              }),
+                        ),
+                      ),
                       DataCell(Text(
                         cartPro.cartItem[index].price.toString(),
                       )),
