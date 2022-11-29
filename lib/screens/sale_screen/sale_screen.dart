@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/item/item.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/sale_provider.dart';
 import '../../providers/user_provider.dart';
@@ -59,12 +60,13 @@ class _SaleScreenState extends State<SaleScreen> {
                             ),
                           ),
                         ),
-                        Consumer3<UserProvider, ItemProvider, SaleProvider>(
-                            builder: (
+                        Consumer4<UserProvider, ItemProvider, SaleProvider,
+                            CartProvider>(builder: (
                           BuildContext context,
                           UserProvider userPro,
                           ItemProvider itemPro,
                           SaleProvider salePro,
+                          CartProvider cartPro,
                           _,
                         ) {
                           return Row(
@@ -90,10 +92,10 @@ class _SaleScreenState extends State<SaleScreen> {
                               ),
                               IconButton(
                                 onPressed: () {
-                                  Item? item1 = itemPro.item(_barcode.text);
-                                  print(item1);
-                                  print(item1?.name ?? 'no name');
-                                  if (item1 == null) {
+                                  Item? item = itemPro.item(_barcode.text);
+                                  print(item);
+                                  print(item?.name ?? 'no name');
+                                  if (item == null) {
                                     showDialog<String>(
                                       context: context,
                                       builder: (BuildContext context) =>
@@ -108,6 +110,9 @@ class _SaleScreenState extends State<SaleScreen> {
                                         ],
                                       ),
                                     );
+                                  } else {
+                                    cartPro.addtocart(
+                                        item, int.parse(_quantity.text));
                                   }
                                 },
                                 icon: const Icon(

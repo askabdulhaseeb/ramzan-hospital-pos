@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 
+import 'cart_provider.dart';
 import 'item/item_category_provider.dart';
 import 'item/item_formula_provider.dart';
 import 'item/item_manufacturer_provider.dart';
@@ -14,6 +15,9 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
       ChangeNotifierProvider<ItemCatProvider>(
         create: (_) => ItemCatProvider(),
+      ),
+      ChangeNotifierProvider<CartProvider>(
+        create: (_) => CartProvider(),
       ),
       ChangeNotifierProvider<ItemFormulaProvider>(
         create: (_) => ItemFormulaProvider(),

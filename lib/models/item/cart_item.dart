@@ -1,4 +1,14 @@
 class CartItem {
+
+  factory CartItem.fromMap(Map<String, dynamic> map) {
+    return CartItem(
+      itemID: map['item_id'] as String,
+      salemanID: map['saleman_id'] as String,
+      price: map['price'] as double,
+      quantity: map['quantity'] as int,
+      discount: map['discount'] as double,
+    );
+  }
   CartItem({
     required this.itemID,
     required this.salemanID,
@@ -21,15 +31,5 @@ class CartItem {
       'quantity': quantity,
       'discount': discount,
     };
-  }
-
-  factory CartItem.fromMap(Map<String, dynamic> map) {
-    return CartItem(
-      itemID: map['item_id'] as String,
-      salemanID: map['saleman_id'] as String,
-      price: map['price'] as double,
-      quantity: map['quantity'] as int,
-      discount: map['discount'] as double,
-    );
   }
 }
