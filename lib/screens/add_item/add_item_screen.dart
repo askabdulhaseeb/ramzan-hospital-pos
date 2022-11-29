@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:firedart/generated/google/protobuf/timestamp.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/item_api/item_api.dart';
+import '../../function/time_date_function.dart';
 import '../../models/item/item.dart';
 import '../../providers/item/item_category_provider.dart';
 import '../../providers/item/item_formula_provider.dart';
@@ -13,6 +16,7 @@ import '../../widgets/custom_widgets/custom_board_widget.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/icon_button.dart';
 import '../../widgets/item/dropdowns/item_dropdowns.dart';
+import '../sale_screen/sale_screen.dart';
 
 class AddItemScreen extends StatefulWidget {
   const AddItemScreen({Key? key}) : super(key: key);
@@ -174,9 +178,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
         Provider.of<ItemManufacturerProvider>(context, listen: false);
     final ItemSupplierProvider supplyPro =
         Provider.of<ItemSupplierProvider>(context, listen: false);
-    final Item item = Item(
-      id: 'id',
-      name: 'name',
+    final Item value = Item(
+      id: TimeStamp.timestamp.toString(),
+      name: _name.text,
       code: _barcode.text,
       line: '',
       category: catPro.selectedCategroy!.catID,
@@ -189,5 +193,22 @@ class _AddItemScreenState extends State<AddItemScreen> {
       salePrice: double.parse(_salePrice.text),
       discount: double.parse(_discount.text),
     );
+    bool temp = await ItemAPI().add(value);
+    if (temp) {
+      // ignore: use_build_context_synchronously
+      Navigator.push(
+        context,
+        // ignore: always_specify_types
+        MaterialPageRoute(
+          builder: (BuildContext context) => const SaleScreen(),
+        ),
+      );
+      _name.clear();
+      _barcode.clear();
+      _qty.clear();
+      _averagePrice.clear();
+      _salePrice.clear();
+      _discount.clear();
+    }
   }
 }
