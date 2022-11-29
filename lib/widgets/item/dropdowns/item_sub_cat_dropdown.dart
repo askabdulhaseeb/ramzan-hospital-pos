@@ -27,6 +27,7 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
       title: _subcategories.text,
     );
     catProvider.selectedCategroy!.subCategories.add(subCat);
+    //catProvider.updatesubCategory(subCat);
     bool temp = await CategoriesAPI().addSubCat(catProvider.selectedCategroy!);
     if (temp) {
       // ignore: use_build_context_synchronously

@@ -27,6 +27,11 @@ class ItemCatProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  updatesubCategory(ItemSubCategory value) {
+    _selectedCat!.subCategories.add(value);
+    notifyListeners();
+  }
+
   List<ItemCategory> get category => <ItemCategory>[..._cat];
   List<ItemSubCategory> get subCategory => <ItemSubCategory>[..._subCategory];
   ItemCategory? get selectedCategroy => _selectedCat;

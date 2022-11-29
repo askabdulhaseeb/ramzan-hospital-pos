@@ -92,7 +92,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: const Text('AlertDialog Title'),
+                  title: const Text('Add Categories'),
                   content: CustomTextFormField(
                     controller: _categories,
                     hint: 'categories ',
