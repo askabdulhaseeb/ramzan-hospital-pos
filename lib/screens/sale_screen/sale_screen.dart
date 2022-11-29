@@ -9,7 +9,7 @@ import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
-import '../../widgets/data_table/custom_data_table.dart';
+import '../../widgets/data_table/data_table.dart';
 
 class SaleScreen extends StatefulWidget {
   const SaleScreen({Key? key}) : super(key: key);
