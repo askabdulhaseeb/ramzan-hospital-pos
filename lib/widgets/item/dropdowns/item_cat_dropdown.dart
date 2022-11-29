@@ -22,14 +22,16 @@ class ItemCatDropdown extends StatefulWidget {
 class _ItemCatDropdownState extends State<ItemCatDropdown> {
   final TextEditingController _categories = TextEditingController();
   uploadcategories(BuildContext context) async {
+    ItemCatProvider catProvider =
+        Provider.of<ItemCatProvider>(context, listen: false);
     ItemCategory value = ItemCategory(
         catID: TimeStamp.timestamp.toString(),
         title: _categories.text,
         subCategories: []);
+    catProvider.updateCategory(value);
     print('ethy phonch giya ay');
     bool temp = await CategoriesAPI().add(value);
     if (temp) {
-      CustomToast.successToast(message: 'Category update');
       // ignore: use_build_context_synchronously
       Navigator.pop(context, 'ok');
     }
@@ -113,7 +115,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
             splashRadius: 16,
             icon: const Icon(
               Icons.add_box_rounded,
-            ))
+            )),
       ],
     );
   }

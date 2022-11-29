@@ -13,8 +13,7 @@ class CategoriesAPI {
       await collection.document(value.catID).set(value.toMap());
       return true;
     } catch (e) {
-      CustomToast.errorToast(
-          message: 'Some Error occured when categories added');
+     
       return false;
     }
   }

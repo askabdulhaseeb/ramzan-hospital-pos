@@ -10,8 +10,7 @@ class ManufacturerAPI {
       await collection.document(value.id).set(value.toMap());
       return true;
     } catch (e) {
-      CustomToast.errorToast(
-          message: 'Some Error occured when categories added');
+      
       return false;
     }
   }
