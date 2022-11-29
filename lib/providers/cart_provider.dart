@@ -23,7 +23,9 @@ class CartProvider extends ChangeNotifier {
     _cartItems[index].discount = a;
     notifyListeners();
   }
-
+  double afterDiscountTestPrice(CartItem value) {
+    return value.price  - value.discount;
+  }
   int _indexOfSelectedIndex(String item1) {
     return _items.indexWhere((Item element) => element.id == item1);
   }

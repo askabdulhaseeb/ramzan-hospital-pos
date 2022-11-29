@@ -102,9 +102,9 @@ class _CustomDataTableState extends State<CustomDataTable> {
                               }),
                         ),
                       ),
-                      DataCell(Text(
-                        cartPro.cartItem[index].price.toString(),
-                      )),
+                      DataCell(Text(cartPro
+                          .afterDiscountTestPrice(cartPro.cartItem[index])
+                          .toString())),
                       DataCell(
                         IconButton(
                           onPressed: () {},
