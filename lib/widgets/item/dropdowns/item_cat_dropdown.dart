@@ -1,13 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../database/item_api/categories_api.dart';
+import '../../../function/time_date_function.dart';
 import '../../../models/item/item_category.dart';
 import '../../../providers/item/item_category_provider.dart';
+import '../../../utilities/custom_validator.dart';
 import '../../../utilities/utilities.dart';
+import '../../custom_widgets/custom_textformfield.dart';
+import '../../custom_widgets/custom_toast.dart';
 
-class ItemCatDropdown extends StatelessWidget {
+class ItemCatDropdown extends StatefulWidget {
   const ItemCatDropdown({super.key});
+
+  @override
+  State<ItemCatDropdown> createState() => _ItemCatDropdownState();
+}
+
+class _ItemCatDropdownState extends State<ItemCatDropdown> {
+  final TextEditingController _categories = TextEditingController();
+  uploadcategories(BuildContext context) async {
+    ItemCategory value = ItemCategory(
+        catID: TimeStamp.timestamp.toString(),
+        title: _categories.text,
+        subCategories: []);
+    print('ethy phonch giya ay');
+    bool temp = await CategoriesAPI().add(value);
+    if (temp) {
+      CustomToast.successToast(message: 'Category update');
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context, 'ok');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +90,20 @@ class ItemCatDropdown extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text('AlertDialog Title'),
-                  content: const Text('AlertDialog description'),
+                  content: CustomTextFormField(
+                    controller: _categories,
+                    hint: 'categories ',
+                    validator: (value) => CustomValidator.lessThen2(value),
+                  ),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () => Navigator.pop(context, 'Cancel'),
                       child: const Text('Cancel'),
                     ),
                     TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
+                      onPressed: () {
+                        uploadcategories(context);
+                      },
                       child: const Text('OK'),
                     ),
                   ],

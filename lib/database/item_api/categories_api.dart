@@ -9,6 +9,7 @@ class CategoriesAPI {
   Future<bool> add(ItemCategory value) async {
     String res = 'start';
     try {
+      print('try chy war giya ay');
       await collection.document(value.catID).set(value.toMap());
       return true;
     } catch (e) {

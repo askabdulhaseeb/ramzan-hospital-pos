@@ -7,8 +7,8 @@ import 'screens/add_item/add_item_screen.dart';
 import 'screens/sale_screen/sale_screen.dart';
 import 'screens/screens.dart';
 
-const apiKey = 'AIzaSyD8-XxjB82a_20VvqUR0ljtCjy9KL4MICU';
-const projectID = 'temporary-project-f558a';
+const apiKey = 'AIzaSyBv5U-vIa00We8z553brPBQNexAzsICDDQ';
+const projectID = 'ramzanhospital-qds';
 void main() {
   Firestore.initialize(projectID);
   FirebaseAuth.initialize(apiKey, VolatileStore());
