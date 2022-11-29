@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import '../../database/item_api/manufacturer_api.dart';
 import '../../models/item/item_manufacturer.dart';
 
 class ItemManufacturerProvider extends ChangeNotifier {
   ItemManufacturerProvider() {
-    _manufacturer = <ItemManufacturer>[
-      ItemManufacturer(id: '1', name: 'name1'),
-      ItemManufacturer(id: '2', name: 'name2'),
-      ItemManufacturer(id: '3', name: 'name3'),
-      ItemManufacturer(id: '4', name: 'name4'),
-      ItemManufacturer(id: '5', name: 'name5'),
-      ItemManufacturer(id: '6', name: 'name6'),
-    ];
+    loadData();
   }
+
+  loadData() async {
+    _manufacturer = await ManufacturerAPI().get();
+    notifyListeners();
+  }
+
   List<ItemManufacturer> _manufacturer = <ItemManufacturer>[];
   ItemManufacturer? _selectedManufacturer;
 
@@ -21,6 +21,10 @@ class ItemManufacturerProvider extends ChangeNotifier {
 
   void onManufacturerUpdate(ItemManufacturer? value) {
     _selectedManufacturer = value;
+    notifyListeners();
+  }
+  void manufacturerUpdate(ItemManufacturer value) {
+    _manufacturer.add(value);
     notifyListeners();
   }
 }
