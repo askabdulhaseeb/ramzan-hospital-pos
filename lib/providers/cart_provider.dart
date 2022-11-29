@@ -18,21 +18,29 @@ class CartProvider extends ChangeNotifier {
   }
 
   void onDiscountUpdate(String str, int index) {
-   // final int index = _indexOfSelectedIndex(value.id);
+    // final int index = _indexOfSelectedIndex(value.id);
     double a = double.parse(str);
     _cartItems[index].discount = a;
     notifyListeners();
   }
+
   double afterDiscountTestPrice(CartItem value) {
-    return value.price  - value.discount;
+    return value.price - value.discount;
   }
+
   int _indexOfSelectedIndex(String item1) {
     return _items.indexWhere((Item element) => element.id == item1);
   }
 
-   List<CartItem> _cartItems = <CartItem>[];
+  delete(String id) {
+    _cartItems.removeWhere((cartItem) => cartItem.itemID == id);
+    _items.removeWhere((item) => item.id == id);
+    notifyListeners();
+  }
+
+  List<CartItem> _cartItems = <CartItem>[];
   List<CartItem> get cartItem => _cartItems;
 
-   List<Item> _items = <Item>[];
+  List<Item> _items = <Item>[];
   List<Item> get item => _items;
 }

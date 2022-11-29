@@ -107,7 +107,9 @@ class _CustomDataTableState extends State<CustomDataTable> {
                           .toString())),
                       DataCell(
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            cartPro.delete(cartPro.item[index].id);
+                          },
                           splashRadius: 16,
                           icon: const Icon(
                             Icons.delete_sweep,
