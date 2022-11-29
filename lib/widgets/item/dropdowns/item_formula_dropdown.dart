@@ -2,14 +2,38 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../database/item_api/formula_api.dart';
+import '../../../function/time_date_function.dart';
 import '../../../models/item/item_category.dart';
 import '../../../models/item/item_formula.dart';
 import '../../../providers/item/item_category_provider.dart';
 import '../../../providers/item/item_formula_provider.dart';
+import '../../../utilities/custom_validator.dart';
 import '../../../utilities/utilities.dart';
+import '../../custom_widgets/custom_textformfield.dart';
 
-class ItemFormulaDropdown extends StatelessWidget {
+class ItemFormulaDropdown extends StatefulWidget {
   const ItemFormulaDropdown({super.key});
+
+  @override
+  State<ItemFormulaDropdown> createState() => _ItemFormulaDropdownState();
+}
+
+class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
+  final TextEditingController _formula = TextEditingController();
+  uploadformula(BuildContext context) async {
+    ItemFormulaProvider formulaPro =
+        Provider.of<ItemFormulaProvider>(context, listen: false);
+    ItemFormula value =
+        ItemFormula(id: TimeStamp.timestamp.toString(), formula: _formula.text);
+    bool temp = await FormulaAPI().add(value);
+    formulaPro.formulaUpdate(value);
+    if (temp) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context, 'ok');
+      _formula.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +83,37 @@ class ItemFormulaDropdown extends StatelessWidget {
             );
           }),
         ),
+        IconButton(
+            onPressed: () {
+              print('icon button pressed');
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Add Formula'),
+                  content: CustomTextFormField(
+                    controller: _formula,
+                    hint: 'formula ',
+                    validator: (value) => CustomValidator.lessThen2(value),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        uploadformula(context);
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            splashRadius: 16,
+            icon: const Icon(
+              Icons.add_box_rounded,
+            )),
       ],
     );
   }

@@ -24,6 +24,7 @@ class ItemCatProvider extends ChangeNotifier {
 
   updateCategory(ItemCategory value) {
     _cat.add(value);
+    //_selectedSubCat = value.subCategories[0];
     notifyListeners();
   }
 

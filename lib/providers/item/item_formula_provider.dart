@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import '../../database/item_api/formula_api.dart';
 import '../../models/item/item_formula.dart';
 
 class ItemFormulaProvider extends ChangeNotifier {
   ItemFormulaProvider() {
-    _formulas = <ItemFormula>[
-      ItemFormula(id: '1', formula: 'formula1'),
-      ItemFormula(id: '2', formula: 'formula2'),
-      ItemFormula(id: '3', formula: 'formula3'),
-      ItemFormula(id: '4', formula: 'formula4'),
-      ItemFormula(id: '5', formula: 'formula5'),
-      ItemFormula(id: '6', formula: 'formula6'),
-    ];
+    loadData();
   }
+  loadData() async {
+    _formulas = await FormulaAPI().get();
+    notifyListeners();
+  }
+
   List<ItemFormula> _formulas = <ItemFormula>[];
   ItemFormula? _selectedFormula;
 
@@ -20,6 +19,10 @@ class ItemFormulaProvider extends ChangeNotifier {
 
   void onFormulaUpdate(ItemFormula? value) {
     _selectedFormula = value;
+    notifyListeners();
+  }
+  void formulaUpdate(ItemFormula value) {
+    _formulas.add(value);
     notifyListeners();
   }
 }

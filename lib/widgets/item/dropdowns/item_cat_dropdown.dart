@@ -29,7 +29,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
         title: _categories.text,
         subCategories: []);
     catProvider.updateCategory(value);
-    print('ethy phonch giya ay');
+    
     bool temp = await CategoriesAPI().add(value);
     if (temp) {
       // ignore: use_build_context_synchronously
