@@ -2,6 +2,8 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../database/item_api/categories_api.dart';
+import '../../../models/item/item_category.dart';
 import '../../../models/item/item_sub_category.dart';
 import '../../../providers/item/item_category_provider.dart';
 import '../../../utilities/custom_validator.dart';
@@ -17,6 +19,22 @@ class ItemSubCatDropdown extends StatefulWidget {
 
 class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
   final TextEditingController _subcategories = TextEditingController();
+  uploadsubcategory(BuildContext context) async {
+    ItemCatProvider catProvider =
+        Provider.of<ItemCatProvider>(context, listen: false);
+    ItemSubCategory subCat = ItemSubCategory(
+      subCatID: _subcategories.text.toLowerCase(),
+      title: _subcategories.text,
+    );
+    catProvider.selectedCategroy!.subCategories.add(subCat);
+    bool temp = await CategoriesAPI().addSubCat(catProvider.selectedCategroy!);
+    if (temp) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context, 'ok');
+      _subcategories.clear();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -87,7 +105,7 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
                       ),
                       TextButton(
                         onPressed: () {
-                          //uploadcategories(context);
+                          uploadsubcategory(context);
                         },
                         child: const Text('OK'),
                       ),

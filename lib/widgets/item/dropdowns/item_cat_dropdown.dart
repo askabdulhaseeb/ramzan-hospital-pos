@@ -34,6 +34,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
     if (temp) {
       // ignore: use_build_context_synchronously
       Navigator.pop(context, 'ok');
+      _categories.clear();
     }
   }
 

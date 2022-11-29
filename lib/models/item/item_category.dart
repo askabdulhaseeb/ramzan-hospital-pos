@@ -22,6 +22,13 @@ class ItemCategory {
     };
   }
 
+   Map<String, dynamic> addSubCat() {
+    return <String, dynamic>{
+      'sub_categories':
+          subCategories.map((ItemSubCategory x) => x.toMap()).toList(),
+    };
+  }
+
   // ignore: sort_constructors_first
   factory ItemCategory.fromDoc(Map<String, dynamic> map) {
     List<ItemSubCategory> subCats = <ItemSubCategory>[];
