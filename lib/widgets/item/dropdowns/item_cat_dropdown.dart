@@ -60,7 +60,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
                 border: OutlineInputBorder(),
                 suffixIcon: Icon(Icons.arrow_drop_down),
                 labelText:
-                    (catPro.edit) ? catPro.selectedCategroy!.title : 'category',
+                    (catPro.edit) ? catPro.selectedCategroy==null?'category' :catPro.selectedCategroy!.title : 'category',
               ),
               onChanged: (dynamic str) => catPro.updateCatSelection(str),
               validator: (dynamic str) {
