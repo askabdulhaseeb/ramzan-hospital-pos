@@ -15,6 +15,7 @@ import '../../../providers/item/item_supplier_provider.dart';
 import '../../../screens/add_item/add_item_screen.dart';
 import '../../../utilities/custom_validator.dart';
 import '../../custom_widgets/custom_board_widget.dart';
+import '../../custom_widgets/custom_text_field.dart';
 import '../../custom_widgets/custom_title_textformfield.dart';
 import '../../custom_widgets/icon_button.dart';
 import '../dropdowns/item_cat_dropdown.dart';
@@ -82,9 +83,15 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                                   ),
                                 ],
                               ),
+                              CustomTitleTextField(
+                                controller: _name,
+                                title: 'Item Name',
+                                value: 'medicine 1',
+                              ),
                               CustomTitleTextFormField(
                                 controller: _name,
                                 title: 'Item Name',
+                                
                                 validator: (String? value) =>
                                     CustomValidator.lessThen4(value),
                               ),

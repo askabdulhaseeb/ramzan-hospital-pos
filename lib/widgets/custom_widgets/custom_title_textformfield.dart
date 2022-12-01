@@ -69,6 +69,7 @@ class CustomTitleTextFormFieldState extends State<CustomTitleTextFormField> {
       ),
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: CupertinoTextFormFieldRow(
+        
         initialValue: widget.initialValue,
         controller: widget._controller,
         readOnly: widget.readOnly,
@@ -86,6 +87,7 @@ class CustomTitleTextFormFieldState extends State<CustomTitleTextFormField> {
         validator: (String? value) => widget.validator!(value),
         cursorColor: Theme.of(context).colorScheme.primary,
         decoration: BoxDecoration(
+          
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(Utlities.tileBorderRadius),
         ),
