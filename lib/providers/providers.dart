@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 
 import 'cart_provider.dart';
+import 'item/edit_item_provider.dart';
 import 'item/item_category_provider.dart';
 import 'item/item_formula_provider.dart';
 import 'item/item_manufacturer_provider.dart';
@@ -28,5 +29,10 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<ItemSupplierProvider>(
         create: (_) => ItemSupplierProvider(),
       ),
+      ChangeNotifierProxyProvider<ItemProvider, EditItemProvider>(
+          create: (_) => EditItemProvider(),
+          update: (_, ItemProvider itemPro, EditItemProvider? editPro) =>
+              editPro!..update(itemPro),
+        ),
       ChangeNotifierProvider<SaleProvider>.value(value: SaleProvider()),
     ];

@@ -14,6 +14,7 @@ class ItemProvider extends ChangeNotifier {
   }
 
   List<Item> _items = <Item>[];
+  List<Item> get items => _items;
   _load() async {
     _items = await ItemAPI().get();
     notifyListeners();
