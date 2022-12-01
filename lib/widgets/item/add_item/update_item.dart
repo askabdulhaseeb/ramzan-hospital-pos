@@ -38,10 +38,10 @@ class UpdateItemScreen extends StatefulWidget {
 class _UpdateItemScreenState extends State<UpdateItemScreen> {
   TextEditingController _barcode = TextEditingController();
   TextEditingController _name = TextEditingController();
-   TextEditingController _qty = TextEditingController(text: '0');
-   TextEditingController _averagePrice = TextEditingController(text: '0');
-   TextEditingController _salePrice = TextEditingController(text: '0');
-   TextEditingController _discount = TextEditingController(text: '0');
+  TextEditingController _qty = TextEditingController(text: '0');
+  TextEditingController _averagePrice = TextEditingController(text: '0');
+  TextEditingController _salePrice = TextEditingController(text: '0');
+  TextEditingController _discount = TextEditingController(text: '0');
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -89,6 +89,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                         } else {
                           setState(() {
                             _name = TextEditingController(text: 'medicine');
+                            _averagePrice = TextEditingController(text: '1234');
+                            _salePrice = TextEditingController(text: '1234');
+                            _qty = TextEditingController(text: '1234');
+                            _discount = TextEditingController(text: '1234');
                           });
                         }
                       },
@@ -111,6 +115,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                             children: <Widget>[
                               CustomTitleTextFormField(
                                 controller: _barcode,
+                                readOnly: true,
                                 title: 'Item Code',
                                 validator: (String? value) =>
                                     CustomValidator.lessThen5(value),
