@@ -14,9 +14,6 @@ import 'user_provider.dart';
 dynamic get listOfProvider => [
       ChangeNotifierProvider<ItemProvider>(create: (_) => ItemProvider()),
       ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
-      ChangeNotifierProvider<ItemCatProvider>(
-        create: (_) => ItemCatProvider(),
-      ),
       ChangeNotifierProvider<CartProvider>(
         create: (_) => CartProvider(),
       ),
@@ -30,9 +27,14 @@ dynamic get listOfProvider => [
         create: (_) => ItemSupplierProvider(),
       ),
       ChangeNotifierProxyProvider<ItemProvider, EditItemProvider>(
-          create: (_) => EditItemProvider(),
-          update: (_, ItemProvider itemPro, EditItemProvider? editPro) =>
-              editPro!..update(itemPro),
-        ),
+        create: (_) => EditItemProvider(),
+        update: (_, ItemProvider itemPro, EditItemProvider? editPro) =>
+            editPro!..update(itemPro),
+      ),
+      ChangeNotifierProxyProvider<EditItemProvider, ItemCatProvider>(
+        create: (_) => ItemCatProvider(),
+        update: (_, EditItemProvider editPro, ItemCatProvider? cartPro) =>
+            cartPro!..updatecart(editPro),
+      ),
       ChangeNotifierProvider<SaleProvider>.value(value: SaleProvider()),
     ];

@@ -8,6 +8,7 @@ import 'package:ramzanhospital_pos/widgets/item/add_item/search_item.dart';
 import '../../../database/item_api/item_api.dart';
 import '../../../function/time_date_function.dart';
 import '../../../models/item/item.dart';
+import '../../../providers/item/edit_item_provider.dart';
 import '../../../providers/item/item_category_provider.dart';
 import '../../../providers/item/item_formula_provider.dart';
 import '../../../providers/item/item_manufacturer_provider.dart';
@@ -26,6 +27,7 @@ import '../dropdowns/item_manufacturer_dropdown.dart';
 import '../dropdowns/item_sub_cat_dropdown.dart';
 import '../dropdowns/item_supplier_dropdown.dart';
 import '../dropdowns/line_item_dropdown.dart';
+import '../update_dropdowns/update_cat_dropdown.dart';
 
 class UpdateItemScreen extends StatefulWidget {
   const UpdateItemScreen({Key? key}) : super(key: key);
@@ -46,7 +48,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ItemProvider itemPro = Provider.of<ItemProvider>(context);
+    EditItemProvider itemPro = Provider.of<EditItemProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('UpdateItemScreen')),
       body: Padding(
@@ -58,7 +60,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     CustomTextFormField(
                       width: 140,
                       height: 35,
@@ -88,11 +90,16 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                           );
                         } else {
                           setState(() {
-                            _name = TextEditingController(text: 'medicine');
-                            _averagePrice = TextEditingController(text: '1234');
-                            _salePrice = TextEditingController(text: '1234');
-                            _qty = TextEditingController(text: '1234');
-                            _discount = TextEditingController(text: '1234');
+                            _name = TextEditingController(
+                                text: itemPro.editItem.name);
+                            _averagePrice = TextEditingController(
+                                text: itemPro.editItem.averagePrice.toString());
+                            _salePrice = TextEditingController(
+                                text: itemPro.editItem.salePrice.toString());
+                            _qty = TextEditingController(
+                                text: itemPro.editItem.quantity.toString());
+                            _discount = TextEditingController(
+                                text: itemPro.editItem.discount.toString());
                           });
                         }
                       },
@@ -135,7 +142,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                           width: 420,
                           child: Column(
                             children: const <Widget>[
-                              ItemCatDropdown(),
+                              UpdateCatDropdown(),
                               ItemSubCatDropdown(),
                               ItemFormulaDropdown(),
                             ],

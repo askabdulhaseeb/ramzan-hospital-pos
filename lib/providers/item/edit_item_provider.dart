@@ -23,6 +23,35 @@ class EditItemProvider extends ChangeNotifier {
 
   List<Item> _items = <Item>[];
 
-  late Item _editItem;
+  Item _editItem = Item(
+    id: 'null',
+    name: 'null',
+    code: 'null',
+    line: 'null',
+    category: 'null',
+    subCategory: 'null',
+    formula: 'null',
+    manufacturer: 'null',
+    supplier: 'null',
+    averagePrice: 0,
+    discount: 0,
+    quantity: 0,
+    salePrice: 0,
+  );
   Item get editItem => _editItem;
+  Item _null() => Item(
+        id: 'null',
+        name: 'null',
+        code: 'null',
+        line: 'null',
+        category: 'null',
+        subCategory: 'null',
+        formula: 'null',
+        manufacturer: 'null',
+        supplier: 'null',
+        averagePrice: 0,
+        discount: 0,
+        quantity: 0,
+        salePrice: 0,
+      );
 }

@@ -1,13 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../database/item_api/categories_api.dart';
 import '../../models/item/item_category.dart';
 import '../../models/item/item_sub_category.dart';
+import 'edit_item_provider.dart';
 
 class ItemCatProvider extends ChangeNotifier {
   ItemCatProvider() {
     loadData();
+  }
+  updatecart(EditItemProvider editPro) {
+    log(editPro.editItem.name);
+    if (editPro.editItem.name == 'null') {
+    } else {
+      if (kDebugMode) {
+        print('chal parha ha');
+      }
+    }
   }
 
   ItemCategory? _selectedCat;
