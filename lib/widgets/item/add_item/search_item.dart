@@ -5,6 +5,7 @@ import '../../../models/item/item.dart';
 import '../../../providers/item/item_provider.dart';
 import '../../../utilities/custom_validator.dart';
 import '../../custom_widgets/custom_textformfield.dart';
+import 'update_item.dart';
 
 class SearchAddScreen extends StatefulWidget {
   const SearchAddScreen({super.key});
@@ -14,7 +15,7 @@ class SearchAddScreen extends StatefulWidget {
 }
 
 class _SearchAddScreenState extends State<SearchAddScreen> {
-  TextEditingController _barcode = TextEditingController();
+  final TextEditingController _barcode = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,16 @@ class _SearchAddScreenState extends State<SearchAddScreen> {
                       ],
                     ),
                   );
-                } else {}
+                } else {
+                  Navigator.push(
+                    context,
+                    // ignore: always_specify_types
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const UpdateItemScreen(),
+                    ),
+                  );
+                }
               },
               icon: const Icon(
                 Icons.save,
