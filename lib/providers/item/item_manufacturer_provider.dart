@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../database/item_api/manufacturer_api.dart';
 import '../../models/item/item_manufacturer.dart';
+import 'edit_item_provider.dart';
 
 class ItemManufacturerProvider extends ChangeNotifier {
   ItemManufacturerProvider() {
@@ -27,4 +28,22 @@ class ItemManufacturerProvider extends ChangeNotifier {
     _manufacturer.add(value);
     notifyListeners();
   }
+
+  updatevalue(EditItemProvider editPro) {
+    if (editPro.editItem.manufacturer == 'null') {
+    } else {
+      for (int i = 0; i < manufacturer.length; i++) {
+        if (manufacturer[i].id == editPro.editItem.manufacturer) {
+          
+          _selectedManufacturer= manufacturer[i];
+          edit = true;
+          
+          break;
+        }
+      }
+     
+    }
+    notifyListeners();
+  }
+   bool edit = false;
 }

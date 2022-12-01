@@ -17,15 +17,9 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<CartProvider>(
         create: (_) => CartProvider(),
       ),
-      ChangeNotifierProvider<ItemFormulaProvider>(
-        create: (_) => ItemFormulaProvider(),
-      ),
-      ChangeNotifierProvider<ItemManufacturerProvider>(
-        create: (_) => ItemManufacturerProvider(),
-      ),
-      ChangeNotifierProvider<ItemSupplierProvider>(
-        create: (_) => ItemSupplierProvider(),
-      ),
+      
+     
+     
       ChangeNotifierProxyProvider<ItemProvider, EditItemProvider>(
         create: (_) => EditItemProvider(),
         update: (_, ItemProvider itemPro, EditItemProvider? editPro) =>
@@ -35,6 +29,21 @@ dynamic get listOfProvider => [
         create: (_) => ItemCatProvider(),
         update: (_, EditItemProvider editPro, ItemCatProvider? cartPro) =>
             cartPro!..updatecart(editPro),
+      ),
+      ChangeNotifierProxyProvider<EditItemProvider, ItemFormulaProvider>(
+        create: (_) => ItemFormulaProvider(),
+        update: (_, EditItemProvider editPro, ItemFormulaProvider? formulaPro) =>
+            formulaPro!..updatevalue(editPro),
+      ),
+      ChangeNotifierProxyProvider<EditItemProvider, ItemManufacturerProvider>(
+        create: (_) => ItemManufacturerProvider(),
+        update: (_, EditItemProvider editPro, ItemManufacturerProvider? value) =>
+            value!..updatevalue(editPro),
+      ),
+      ChangeNotifierProxyProvider<EditItemProvider, ItemSupplierProvider>(
+        create: (_) => ItemSupplierProvider(),
+        update: (_, EditItemProvider editPro, ItemSupplierProvider? value) =>
+            value!..updatevalue(editPro),
       ),
       ChangeNotifierProvider<SaleProvider>.value(value: SaleProvider()),
     ];
