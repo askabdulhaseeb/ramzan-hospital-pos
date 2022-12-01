@@ -12,13 +12,15 @@ class EditItemProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Item? item(String codeValue) {
+  void item(String codeValue) {
     final int index =
         _items.indexWhere((Item element) => element.code == codeValue);
     if (index >= 0) {
       _editItem = _items[index];
+    } else {
+      _editItem = _null();
     }
-    return index < 0 ? null : _items[index];
+    notifyListeners();
   }
 
   List<Item> _items = <Item>[];

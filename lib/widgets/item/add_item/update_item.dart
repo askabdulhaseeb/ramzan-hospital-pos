@@ -72,9 +72,9 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Item? item = itemPro.item(_barcode.text);
+                        void item = itemPro.item(_barcode.text);
 
-                        if (item == null) {
+                        if (itemPro.editItem.name == 'null') {
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
