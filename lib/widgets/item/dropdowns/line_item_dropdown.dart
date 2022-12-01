@@ -1,3 +1,5 @@
+// ignore_for_file: always_specify_types
+
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 
@@ -32,14 +34,12 @@ class LineItemDropdown extends StatelessWidget {
                 underline: const SizedBox(),
                 isDense: true,
                 items: ['1', '2', '3']
-                    .map((e) => DropdownMenuItem(
+                    .map((String e) => DropdownMenuItem(
                           value: e,
                           child: Text(e),
                         ))
                     .toList(),
-                onChanged: (String? value) {
-                  
-                }),
+                onChanged: (String? value) {}),
           ),
         ),
       ],
