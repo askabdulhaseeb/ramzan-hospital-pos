@@ -36,12 +36,12 @@ class UpdateItemScreen extends StatefulWidget {
 }
 
 class _UpdateItemScreenState extends State<UpdateItemScreen> {
-  final TextEditingController _barcode = TextEditingController();
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _qty = TextEditingController(text: '0');
-  final TextEditingController _averagePrice = TextEditingController(text: '0');
-  final TextEditingController _salePrice = TextEditingController(text: '0');
-  final TextEditingController _discount = TextEditingController(text: '0');
+  TextEditingController _barcode = TextEditingController();
+  TextEditingController _name = TextEditingController();
+   TextEditingController _qty = TextEditingController(text: '0');
+   TextEditingController _averagePrice = TextEditingController(text: '0');
+   TextEditingController _salePrice = TextEditingController(text: '0');
+   TextEditingController _discount = TextEditingController(text: '0');
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   @override
@@ -87,14 +87,9 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                             ),
                           );
                         } else {
-                          Navigator.push(
-                            context,
-                            // ignore: always_specify_types
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const UpdateItemScreen(),
-                            ),
-                          );
+                          setState(() {
+                            _name = TextEditingController(text: 'medicine');
+                          });
                         }
                       },
                       icon: const Icon(
@@ -114,25 +109,11 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                           width: 420,
                           child: Column(
                             children: <Widget>[
-                              Row(
-                                children: <Widget>[
-                                  const SizedBox(
-                                      width: 120,
-                                      child: Text(
-                                        'Bar code ',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )),
-                                  Container(
-                                    width: 260,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                    ),
-                                    child: Text('12345'),
-                                  ),
-                                ],
+                              CustomTitleTextFormField(
+                                controller: _barcode,
+                                title: 'Item Code',
+                                validator: (String? value) =>
+                                    CustomValidator.lessThen5(value),
                               ),
                               CustomTitleTextFormField(
                                 controller: _name,
