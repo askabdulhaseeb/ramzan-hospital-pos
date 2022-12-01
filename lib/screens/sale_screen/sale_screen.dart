@@ -23,6 +23,7 @@ class SaleScreen extends StatefulWidget {
 class _SaleScreenState extends State<SaleScreen> {
   TextEditingController _barcode = TextEditingController();
   TextEditingController _quantity = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -70,58 +71,65 @@ class _SaleScreenState extends State<SaleScreen> {
                           CartProvider cartPro,
                           _,
                         ) {
-                          return Row(
-                            children: <Widget>[
-                              const Text('salesman'),
-                              const SizedBox(width: 10),
-                              TitleTextFormField(
-                                controller: _quantity,
-                                title: 'Qty',
-                                width: 100,
-                                validator: (String? value) =>
-                                    CustomValidator.isEmpty(value),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              CustomTextFormField(
-                                width: 140,
-                                height: 35,
-                                hint: 'barcode add',
-                                controller: _barcode,
-                                color: Colors.white,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  Item? item = itemPro.item(_barcode.text);
-                                  print(item);
-                                  print(item?.name ?? 'no name');
-                                  if (item == null) {
-                                    showDialog<String>(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                        title: const Text('No item Found'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                context, 'Cancel'),
-                                            child: const Text('Cancel'),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  } else {
-                                    cartPro.addtocart(
-                                        item, int.parse(_quantity.text));
-                                  }
-                                },
-                                icon: const Icon(
-                                  Icons.save,
-                                  color: Colors.grey,
+                          return Form(
+                            key: _formKey,
+                            child: Row(
+                              children: <Widget>[
+                                const Text('salesman'),
+                                const SizedBox(width: 10),
+                                TitleTextFormField(
+                                  controller: _quantity,
+                                  title: 'Qty',
+                                  width: 100,
+                                  validator: (String? value) =>
+                                      CustomValidator.isEmpty(value),
                                 ),
-                              )
-                            ],
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                CustomTextFormField(
+                                  width: 140,
+                                  height: 35,
+                                  hint: 'barcode add',
+                                  controller: _barcode,
+                                  color: Colors.white,
+                                  validator: (String? value) =>
+                                      CustomValidator.isEmpty(value),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    if (!_formKey.currentState!.validate())
+                                      return;
+                                    Item? item = itemPro.item(_barcode.text);
+                                    print(item);
+                                    print(item?.name ?? 'no name');
+                                    if (item == null) {
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text('No item Found'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'Cancel'),
+                                              child: const Text('Cancel'),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else {
+                                      cartPro.addtocart(
+                                          item, int.parse(_quantity.text));
+                                    }
+                                  },
+                                  icon: const Icon(
+                                    Icons.save,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              ],
+                            ),
                           );
                         }),
                       ],
