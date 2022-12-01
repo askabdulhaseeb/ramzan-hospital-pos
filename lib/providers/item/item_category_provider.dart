@@ -16,8 +16,19 @@ class ItemCatProvider extends ChangeNotifier {
     log(editPro.editItem.name);
     if (editPro.editItem.name == 'null') {
     } else {
-      if (kDebugMode) {
-        print('chal parha ha');
+      for (int i = 0; i < category.length; i++) {
+        if (category[i].catID == editPro.editItem.category) {
+          print(category[i].title);
+          _selectedCat = category[i];
+          break;
+        }
+      }
+      for (int i = 0; i < _subCategory.length; i++) {
+        if (_subCategory[i].subCatID == editPro.editItem.category) {
+          print(_subCategory[i].title);
+          _selectedSubCat = _subCategory[i];
+          break;
+        }
       }
     }
   }
