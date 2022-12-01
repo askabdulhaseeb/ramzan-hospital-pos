@@ -19,8 +19,8 @@ class CartItem {
 
   final String itemID;
   final String salemanID;
-  final double price;
-  final int quantity;
+   double price;
+   int quantity;
   double discount;
 
   Map<String, dynamic> toMap() {
