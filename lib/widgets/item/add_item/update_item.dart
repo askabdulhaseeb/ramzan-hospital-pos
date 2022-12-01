@@ -11,11 +11,13 @@ import '../../../models/item/item.dart';
 import '../../../providers/item/item_category_provider.dart';
 import '../../../providers/item/item_formula_provider.dart';
 import '../../../providers/item/item_manufacturer_provider.dart';
+import '../../../providers/item/item_provider.dart';
 import '../../../providers/item/item_supplier_provider.dart';
 import '../../../screens/add_item/add_item_screen.dart';
 import '../../../utilities/custom_validator.dart';
 import '../../custom_widgets/custom_board_widget.dart';
 import '../../custom_widgets/custom_text_field.dart';
+import '../../custom_widgets/custom_textformfield.dart';
 import '../../custom_widgets/custom_title_textformfield.dart';
 import '../../custom_widgets/icon_button.dart';
 import '../dropdowns/item_cat_dropdown.dart';
@@ -44,6 +46,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ItemProvider itemPro = Provider.of<ItemProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('UpdateItemScreen')),
       body: Padding(
@@ -53,6 +56,54 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
             key: _key,
             child: Column(
               children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextFormField(
+                      width: 140,
+                      height: 35,
+                      hint: 'barcode add',
+                      controller: _barcode,
+                      color: Colors.white,
+                      validator: (String? value) =>
+                          CustomValidator.isEmpty(value),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Item? item = itemPro.item(_barcode.text);
+
+                        if (item == null) {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('No item Found'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, 'Cancel'),
+                                  child: const Text('Cancel'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            // ignore: always_specify_types
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const UpdateItemScreen(),
+                            ),
+                          );
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.save,
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                ),
                 Row(
                   children: <Widget>[
                     Column(
@@ -83,15 +134,9 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                                   ),
                                 ],
                               ),
-                              CustomTitleTextField(
-                                controller: _name,
-                                title: 'Item Name',
-                                value: 'medicine 1',
-                              ),
                               CustomTitleTextFormField(
                                 controller: _name,
                                 title: 'Item Name',
-                                
                                 validator: (String? value) =>
                                     CustomValidator.lessThen4(value),
                               ),
@@ -134,6 +179,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                               CustomTitleTextFormField(
                                 controller: _qty,
                                 title: 'Item Quantity',
+                                readOnly: true,
                                 validator: (String? value) =>
                                     CustomValidator.isEmpty(value),
                               ),
