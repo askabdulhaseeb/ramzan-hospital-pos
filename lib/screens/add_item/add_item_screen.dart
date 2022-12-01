@@ -10,6 +10,7 @@ import '../../models/item/item.dart';
 import '../../providers/item/item_category_provider.dart';
 import '../../providers/item/item_formula_provider.dart';
 import '../../providers/item/item_manufacturer_provider.dart';
+import '../../providers/item/item_provider.dart';
 import '../../providers/item/item_supplier_provider.dart';
 import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_board_widget.dart';
@@ -39,6 +40,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ItemProvider itemPro = Provider.of<ItemProvider>(context);
     return Scaffold(
       appBar: AppBar(title: const Text('AddItemScreen')),
       body: Padding(
@@ -152,7 +154,9 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       title: 'Edit',
                       icon: Icons.edit,
                       bgColor: Colors.greenAccent,
-                      onTap: () {
+                      onTap: () async{
+                        await itemPro.load();
+                        // ignore: use_build_context_synchronously
                         Navigator.push(
                           context,
                           // ignore: always_specify_types

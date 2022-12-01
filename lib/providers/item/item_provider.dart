@@ -5,7 +5,7 @@ import '../../models/item/item.dart';
 
 class ItemProvider extends ChangeNotifier {
   ItemProvider() {
-    _load();
+    load();
   }
   Item? item(String codeValue) {
     final int index =
@@ -15,7 +15,7 @@ class ItemProvider extends ChangeNotifier {
 
   List<Item> _items = <Item>[];
   List<Item> get items => _items;
-  _load() async {
+  load() async {
     _items = await ItemAPI().get();
     notifyListeners();
   }

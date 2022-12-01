@@ -13,6 +13,7 @@ class EditItemProvider extends ChangeNotifier {
   }
 
   void item(String codeValue) {
+    _editItem = _null();
     final int index =
         _items.indexWhere((Item element) => element.code == codeValue);
     if (index >= 0) {
