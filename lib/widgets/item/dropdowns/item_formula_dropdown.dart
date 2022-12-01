@@ -82,7 +82,7 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
             ),
         ),
        formulaPro.edit
-            ? SizedBox()
+            ? const SizedBox()
             : IconButton(
             onPressed: () {
               showDialog<String>(

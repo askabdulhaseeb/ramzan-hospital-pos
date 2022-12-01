@@ -84,7 +84,7 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
             ),
         ),
       manuPro.edit
-            ? SizedBox()
+            ? const SizedBox()
             : IconButton(
             onPressed: () {
               showDialog<String>(

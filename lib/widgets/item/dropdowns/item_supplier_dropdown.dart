@@ -52,8 +52,8 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
               child: DropdownFormField<ItemSupplier>(
                 decoration:  InputDecoration(
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: const Icon(Icons.arrow_drop_down),
                   labelText:  (supplierPro.edit) ? supplierPro.selectedSupplier==null?'Supplier' :supplierPro.selectedSupplier!.name : 'Supplier',
                 ),
                 onChanged: (dynamic str) => supplierPro.onSupplierUpdate(str),
@@ -80,7 +80,7 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
             ),
         ),
        supplierPro.edit
-            ? SizedBox()
+            ? const SizedBox()
             : IconButton(
             onPressed: () {
               showDialog<String>(

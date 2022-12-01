@@ -86,7 +86,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
           ),
         ),
         catPro.edit
-            ? SizedBox()
+            ? const SizedBox()
             : IconButton(
                 onPressed: () {
                   showDialog<String>(
