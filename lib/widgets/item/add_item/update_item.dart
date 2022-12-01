@@ -208,7 +208,11 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                     CustomIconButton(
                       title: 'Update',
                       icon: Icons.update,
-                      onTap: () async => await addItem(context),
+                      onTap: () {
+                        print(_name.text);
+                        print(_salePrice.text);
+                        addItem(context);
+                      },
                     ),
                     const SizedBox(width: 20),
                   ],
@@ -233,8 +237,10 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
         Provider.of<ItemManufacturerProvider>(context, listen: false);
     final ItemSupplierProvider supplyPro =
         Provider.of<ItemSupplierProvider>(context, listen: false);
+    EditItemProvider itemPro =
+        Provider.of<EditItemProvider>(context, listen: false);
     final Item value = Item(
-      id: TimeStamp.timestamp.toString(),
+      id: itemPro.editItem.id,
       name: _name.text,
       code: _barcode.text,
       line: '',
@@ -248,7 +254,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
       salePrice: double.parse(_salePrice.text),
       discount: double.parse(_discount.text),
     );
-    bool temp = await ItemAPI().add(value);
+    bool temp = await ItemAPI().update(value);
     if (temp) {
       // ignore: use_build_context_synchronously
       Navigator.push(

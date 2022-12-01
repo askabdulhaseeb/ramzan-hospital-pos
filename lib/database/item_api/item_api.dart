@@ -15,6 +15,15 @@ class ItemAPI {
       return false;
     }
   }
+   Future<bool> update(Item value) async {
+    try {
+      await collection.document(value.id).update(value.toMap());
+      return true;
+    } catch (e) {
+  
+      return false;
+    }
+  }
 
   Future<List<Item>> get() async {
     List<Item> value = <Item>[];
