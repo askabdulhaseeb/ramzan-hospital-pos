@@ -57,8 +57,8 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
               child: DropdownFormField<ItemSubCategory>(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: const Icon(Icons.arrow_drop_down),
                   labelText: (catPro.edit)
                       // ignore: unnecessary_null_comparison
                       ? catPro.selectedSubCategory == null
@@ -91,7 +91,7 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
             ),
           ),
           (catPro.edit)
-              ? SizedBox()
+              ? const SizedBox()
               : IconButton(
                   onPressed: () {
                     showDialog<String>(
