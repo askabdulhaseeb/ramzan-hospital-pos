@@ -32,7 +32,7 @@ class ItemSupplierProvider extends ChangeNotifier {
     if (editPro.editItem.supplier == 'null') {
     } else {
       for (int i = 0; i < _suppliers.length; i++) {
-        if (_suppliers[i].id == editPro.editItem.formula) {
+        if (_suppliers[i].id == editPro.editItem.supplier) {
           _selectedSupplier = _suppliers[i];
           edit = true;
 
