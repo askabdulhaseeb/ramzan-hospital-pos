@@ -101,8 +101,7 @@ class _SaleScreenState extends State<SaleScreen> {
                                     if (!_formKey.currentState!.validate())
                                       return;
                                     Item? item = itemPro.item(_barcode.text);
-                                    print(item);
-                                    print(item?.name ?? 'no name');
+                                    
                                     if (item == null) {
                                       showDialog<String>(
                                         context: context,

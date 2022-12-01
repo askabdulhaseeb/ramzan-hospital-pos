@@ -85,7 +85,7 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
         ),
         IconButton(
             onPressed: () {
-              print('icon button pressed');
+             
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(

@@ -88,7 +88,7 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
         ),
         IconButton(
             onPressed: () {
-              print('icon button pressed');
+            
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(

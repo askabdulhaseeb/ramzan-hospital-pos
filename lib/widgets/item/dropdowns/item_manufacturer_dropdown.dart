@@ -86,7 +86,7 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
         ),
         IconButton(
             onPressed: () {
-              print('icon button pressed');
+             
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(

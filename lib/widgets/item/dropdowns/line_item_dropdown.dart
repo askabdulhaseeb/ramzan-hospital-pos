@@ -38,7 +38,7 @@ class LineItemDropdown extends StatelessWidget {
                         ))
                     .toList(),
                 onChanged: (String? value) {
-                  print(value);
+                  
                 }),
           ),
         ),
