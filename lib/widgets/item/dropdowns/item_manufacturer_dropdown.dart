@@ -38,6 +38,9 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    ItemManufacturerProvider manuPro =
+        Provider.of<ItemManufacturerProvider>(context);
+    final List<ItemManufacturer> manu = manuPro.manufacturer;
     return Row(
       children: <Widget>[
         SizedBox(
@@ -48,17 +51,14 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
           ),
         ),
         Expanded(
-          child: Consumer<ItemManufacturerProvider>(builder:
-              (BuildContext context, ItemManufacturerProvider manuPro, _) {
-            final List<ItemManufacturer> manu = manuPro.manufacturer;
-            return Padding(
+          child:  Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
               child: DropdownFormField<ItemManufacturer>(
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText: 'Manufacturer',
+                  labelText: (manuPro.edit) ? manuPro.selectedManufacturer==null?'Manufacturer' :manuPro.selectedManufacturer!.name : 'Manufacturer',
                 ),
                 onChanged: (dynamic str) => manuPro.onManufacturerUpdate(str),
                 validator: (dynamic str) {
@@ -81,12 +81,12 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
                   onTap: onTap,
                 ),
               ),
-            );
-          }),
+            ),
         ),
-        IconButton(
+      manuPro.edit
+            ? SizedBox()
+            : IconButton(
             onPressed: () {
-             
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(

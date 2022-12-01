@@ -37,6 +37,8 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    ItemFormulaProvider formulaPro = Provider.of<ItemFormulaProvider>(context);
+    final List<ItemFormula> formulas = formulaPro.formulas;
     return Row(
       children: <Widget>[
         SizedBox(
@@ -47,17 +49,14 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
           ),
         ),
         Expanded(
-          child: Consumer<ItemFormulaProvider>(builder:
-              (BuildContext context, ItemFormulaProvider formulaPro, _) {
-            final List<ItemFormula> formulas = formulaPro.formulas;
-            return Padding(
+          child:  Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
               child: DropdownFormField<ItemFormula>(
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText: 'Formula',
+                  labelText:  (formulaPro.edit) ? formulaPro.selectedFormula==null?'Formula' :formulaPro.selectedFormula!.formula : 'Formula',
                 ),
                 onChanged: (dynamic str) => formulaPro.onFormulaUpdate(str),
                 validator: (dynamic str) {
@@ -80,12 +79,12 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
                   onTap: onTap,
                 ),
               ),
-            );
-          }),
+            ),
         ),
-        IconButton(
+       formulaPro.edit
+            ? SizedBox()
+            : IconButton(
             onPressed: () {
-             
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(

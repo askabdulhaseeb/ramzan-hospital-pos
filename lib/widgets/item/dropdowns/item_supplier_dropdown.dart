@@ -35,6 +35,8 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    ItemSupplierProvider supplierPro = Provider.of<ItemSupplierProvider>(context);
+    final List<ItemSupplier> supp = supplierPro.suppliers;
     return Row(
       children: <Widget>[
         SizedBox(
@@ -45,17 +47,14 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
           ),
         ),
         Expanded(
-          child: Consumer<ItemSupplierProvider>(builder:
-              (BuildContext context, ItemSupplierProvider supplierPro, _) {
-            final List<ItemSupplier> supp = supplierPro.suppliers;
-            return Padding(
+          child: Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
               child: DropdownFormField<ItemSupplier>(
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText: 'Supplier',
+                  labelText:  (supplierPro.edit) ? supplierPro.selectedSupplier==null?'Supplier' :supplierPro.selectedSupplier!.name : 'Supplier',
                 ),
                 onChanged: (dynamic str) => supplierPro.onSupplierUpdate(str),
                 validator: (dynamic str) {
@@ -78,12 +77,12 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
                   onTap: onTap,
                 ),
               ),
-            );
-          }),
+            ),
         ),
-        IconButton(
+       supplierPro.edit
+            ? SizedBox()
+            : IconButton(
             onPressed: () {
-              
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
