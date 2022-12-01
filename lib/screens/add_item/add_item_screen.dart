@@ -15,6 +15,7 @@ import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_board_widget.dart';
 import '../../widgets/custom_widgets/custom_title_textformfield.dart';
 import '../../widgets/custom_widgets/icon_button.dart';
+import '../../widgets/item/add_item/edit_item.dart';
 import '../../widgets/item/dropdowns/item_dropdowns.dart';
 import '../sale_screen/sale_screen.dart';
 
@@ -144,6 +145,22 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       title: 'Add',
                       icon: Icons.add,
                       onTap: () async => await addItem(context),
+                    ),
+                    const SizedBox(width: 20),
+                    CustomIconButton(
+                      title: 'Edit',
+                      icon: Icons.edit,
+                      bgColor: Colors.greenAccent,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          // ignore: always_specify_types
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const EditAddScreen(),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(width: 20),
                     CustomIconButton(
