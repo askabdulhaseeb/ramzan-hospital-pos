@@ -62,12 +62,25 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                           width: 420,
                           child: Column(
                             children: <Widget>[
-                              const LineItemDropdown(),
-                              CustomTitleTextFormField(
-                                controller: _barcode,
-                                title: 'Item Code',
-                                validator: (String? value) =>
-                                    CustomValidator.lessThen5(value),
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                      width: 120,
+                                      child: Text(
+                                        'Bar code ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                  Container(
+                                    width: 260,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                    ),
+                                    child: Text('12345'),
+                                  ),
+                                ],
                               ),
                               CustomTitleTextFormField(
                                 controller: _name,
