@@ -10,6 +10,7 @@ import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
 import '../../widgets/data_table/data_table.dart';
+import 'sale_total_side.dart';
 
 class SaleScreen extends StatefulWidget {
   const SaleScreen({Key? key}) : super(key: key);
@@ -152,21 +153,6 @@ class SaleButtonSide extends StatelessWidget {
       height: 160,
       width: double.infinity,
       color: Colors.blue,
-    );
-  }
-}
-
-class SaleTotalSide extends StatelessWidget {
-  const SaleTotalSide({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: 300,
-      color: Colors.black,
     );
   }
 }
