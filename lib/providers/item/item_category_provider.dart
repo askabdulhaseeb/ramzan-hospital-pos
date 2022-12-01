@@ -13,24 +13,26 @@ class ItemCatProvider extends ChangeNotifier {
     loadData();
   }
   updatecart(EditItemProvider editPro) {
-    log(editPro.editItem.name);
     if (editPro.editItem.name == 'null') {
     } else {
       for (int i = 0; i < category.length; i++) {
         if (category[i].catID == editPro.editItem.category) {
-          print(category[i].title);
+          for (int j = 0; j < category[i].subCategories.length; j++) {
+            if (category[i].subCategories[j].subCatID ==
+                editPro.editItem.subCategory) {
+              _selectedSubCat = category[i].subCategories[j];
+            }
+            break;
+          }
           _selectedCat = category[i];
+          edit = true;
+          
           break;
         }
       }
-      for (int i = 0; i < _subCategory.length; i++) {
-        if (_subCategory[i].subCatID == editPro.editItem.category) {
-          print(_subCategory[i].title);
-          _selectedSubCat = _subCategory[i];
-          break;
-        }
-      }
+     
     }
+    notifyListeners();
   }
 
   ItemCategory? _selectedCat;
@@ -60,6 +62,7 @@ class ItemCatProvider extends ChangeNotifier {
   List<ItemSubCategory> get subCategory => <ItemSubCategory>[..._subCategory];
   ItemCategory? get selectedCategroy => _selectedCat;
   ItemSubCategory? get selectedSubCategory => _selectedSubCat;
+  bool edit = false;
 
   void updateCatSelection(ItemCategory? updatedCategroy) {
     _selectedCat = updatedCategroy;

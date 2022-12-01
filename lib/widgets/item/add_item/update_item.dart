@@ -142,7 +142,7 @@ class _UpdateItemScreenState extends State<UpdateItemScreen> {
                           width: 420,
                           child: Column(
                             children: const <Widget>[
-                              UpdateCatDropdown(),
+                              ItemCatDropdown(),
                               ItemSubCatDropdown(),
                               ItemFormulaDropdown(),
                             ],

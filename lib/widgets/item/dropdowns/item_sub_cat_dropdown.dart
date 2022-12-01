@@ -38,6 +38,8 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
 
   @override
   Widget build(BuildContext context) {
+    ItemCatProvider catPro=Provider.of<ItemCatProvider>(context);
+    final List<ItemSubCategory> cats = catPro.subCategory;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -50,17 +52,16 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
             ),
           ),
           Expanded(
-            child: Consumer<ItemCatProvider>(
-                builder: (BuildContext context, ItemCatProvider catPro, _) {
-              final List<ItemSubCategory> cats = catPro.subCategory;
-              return Padding(
+            child:  Padding(
                 padding: const EdgeInsets.only(
                     left: 18, right: 8, top: 4, bottom: 4),
                 child: DropdownFormField<ItemSubCategory>(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     suffixIcon: Icon(Icons.arrow_drop_down),
-                    labelText: 'Sub Category',
+                    labelText: (catPro.edit)
+                        ? catPro.selectedSubCategory!.title
+                        : 'sub category',
                   ),
                   onChanged: (dynamic str) =>
                       catPro.updateSubCategorySection(str),
@@ -84,12 +85,12 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
                     onTap: onTap,
                   ),
                 ),
-              );
-            }),
+              ),
           ),
-          IconButton(
+         (catPro.edit)? 
+         SizedBox()
+         :IconButton(
               onPressed: () {
-                
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
