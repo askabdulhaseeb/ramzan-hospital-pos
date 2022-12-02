@@ -20,25 +20,26 @@ class _SaleTotalSideState extends State<SaleTotalSide> {
     CartProvider cartPro = Provider.of<CartProvider>(context);
 
     return Container(
-      height: double.infinity,
       width: 300,
       color: const Color(0xff9bcdc6),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 14, vertical: height * 0.1),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            totalWidgets('Gross Total', cartPro.totalNetPrice),
-            totalWidgets('Discount', cartPro.totalDiscount),
-            customDiscountWidget('Customer Discount', cartPro),
-            totalWidgets('Net Gross Total', cartPro.grossTotal()),
-            adjustmentWidgets('Adjustment', cartPro),
-            totalWidgets('Sales tax', 0),
-            SizedBox(
-              height: height * 0.2,
-            ),
-            netTotal(cartPro.netTotal())
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              totalWidgets('Gross Total', cartPro.totalNetPrice),
+              totalWidgets('Discount', cartPro.totalDiscount),
+              customDiscountWidget('Customer Discount', cartPro),
+              totalWidgets('Net Gross Total', cartPro.grossTotal()),
+              adjustmentWidgets('Adjustment', cartPro),
+              totalWidgets('Sales tax', 0),
+              SizedBox(
+                height: height * 0.2,
+              ),
+              netTotal(cartPro.netTotal())
+            ],
+          ),
         ),
       ),
     );
