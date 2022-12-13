@@ -37,6 +37,7 @@ class CartProvider extends ChangeNotifier {
     customerDiscount = a;
     notifyListeners();
   }
+
   void adjustmentUpdate(String str) {
     double a = double.parse(str);
     adjustment = a;
@@ -60,8 +61,9 @@ class CartProvider extends ChangeNotifier {
   double grossTotal() {
     return totalNetPrice - totalDiscount - customerDiscount;
   }
+
   double netTotal() {
-    return totalNetPrice - totalDiscount - customerDiscount-adjustment;
+    return totalNetPrice - totalDiscount - customerDiscount - adjustment;
   }
 
   int _indexOfSelectedIndex(String item1) {
@@ -72,6 +74,15 @@ class CartProvider extends ChangeNotifier {
     _cartItems.removeWhere((cartItem) => cartItem.itemID == id);
     _items.removeWhere((item) => item.id == id);
     total();
+  }
+
+  emptyCart() {
+    _cartItems.clear();
+    _items.clear();
+    totalNetPrice = 0;
+ totalDiscount = 0;
+  customerDiscount = 0;
+  adjustment = 0;
   }
 
   List<CartItem> _cartItems = <CartItem>[];

@@ -13,6 +13,7 @@ import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
 import '../../widgets/data_table/data_table.dart';
 import '../../widgets/sale/add_patient.dart';
+import '../../widgets/sale/sale_bottom.dart';
 import '../../widgets/sale/search_patient.dart';
 import 'sale_total_side.dart';
 
@@ -161,7 +162,11 @@ class _SaleScreenState extends State<SaleScreen> {
                                                     height: height - 100,
                                                     width: width / 2,
                                                     //child: AddPatientUi(),
-                                                     child:patientPro.addPatiernt==true? AddPatientUi():PatientSearchUi(),
+                                                    child: patientPro
+                                                                .addPatiernt ==
+                                                            true
+                                                        ? AddPatientUi()
+                                                        : PatientSearchUi(),
                                                   );
                                                 },
                                               ),
@@ -191,8 +196,20 @@ class _SaleScreenState extends State<SaleScreen> {
                             ),
                           );
                         }),
-                        // Text('Patient Name:'),
-                        // Text('Mobile No:')
+                        Consumer<PatientProvider>(builder:
+                            (context, PatientProvider patientpro, snapshot) {
+                          return patientpro.selectedpatient.name == 'unknown'
+                              ? SizedBox()
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        'Patient Name: ${patientpro.selectedpatient.name}'),
+                                    Text(
+                                        'Mobile No: ${patientpro.selectedpatient.phoneNumber}')
+                                  ],
+                                );
+                        }),
                       ],
                     ),
                   ),
@@ -207,21 +224,6 @@ class _SaleScreenState extends State<SaleScreen> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class SaleBottom extends StatelessWidget {
-  const SaleBottom({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 160,
-      width: double.infinity,
-      color: Colors.blue,
     );
   }
 }
