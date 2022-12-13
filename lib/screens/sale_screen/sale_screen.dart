@@ -12,8 +12,8 @@ import '../../utilities/custom_validator.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/custom_widgets/title_textformfield.dart';
 import '../../widgets/data_table/data_table.dart';
-import '../patient/add_patient.dart';
-import '../patient/search_patient.dart';
+import '../../widgets/sale/add_patient.dart';
+import '../../widgets/sale/search_patient.dart';
 import 'sale_total_side.dart';
 
 class SaleScreen extends StatefulWidget {
@@ -145,13 +145,14 @@ class _SaleScreenState extends State<SaleScreen> {
                                                               Radius.circular(
                                                                   10.0))),
                                               content: Builder(
-                                                builder: (context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   // Get available height and width of the build area of this widget. Make a choice depending on the size.
-                                                  var height =
+                                                  double height =
                                                       MediaQuery.of(context)
                                                           .size
                                                           .height;
-                                                  var width =
+                                                  double width =
                                                       MediaQuery.of(context)
                                                           .size
                                                           .width;
@@ -159,7 +160,8 @@ class _SaleScreenState extends State<SaleScreen> {
                                                   return SizedBox(
                                                     height: height - 100,
                                                     width: width / 2,
-                                                    child: AddPatientUi(),
+                                                    //child: AddPatientUi(),
+                                                     child:patientPro.addPatiernt==true? AddPatientUi():PatientSearchUi(),
                                                   );
                                                 },
                                               ),
@@ -197,7 +199,7 @@ class _SaleScreenState extends State<SaleScreen> {
                   const Expanded(
                     child: CustomDataTable(),
                   ),
-                  const SaleButtonSide(),
+                  const SaleBottom(),
                 ],
               ),
             ),
@@ -209,8 +211,8 @@ class _SaleScreenState extends State<SaleScreen> {
   }
 }
 
-class SaleButtonSide extends StatelessWidget {
-  const SaleButtonSide({
+class SaleBottom extends StatelessWidget {
+  const SaleBottom({
     Key? key,
   }) : super(key: key);
 

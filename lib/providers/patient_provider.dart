@@ -40,4 +40,24 @@ class PatientProvider with ChangeNotifier {
     notifyListeners();
     return await PatientAPI().add(value);
   }
+
+  void updatePatientScreen() {
+    print(addPatiernt);
+    addPatiernt = true;
+    notifyListeners();
+  }
+
+  void selectPatient(Patient value) {
+    _selectedPatient = value;
+    notifyListeners();
+  }
+
+  bool addPatiernt = false;
+
+  Patient _selectedPatient = Patient(
+      patientID: '1',
+      name: 'unknown',
+      phoneNumber: 'unknown',
+      address: 'unknown');
+  Patient get selectedpatient => _selectedPatient;
 }

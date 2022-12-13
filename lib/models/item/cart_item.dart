@@ -1,6 +1,8 @@
+import 'package:flutter/src/widgets/framework.dart';
+
 class CartItem {
 
-  factory CartItem.fromMap(Map<String, dynamic> map) {
+  factory CartItem.fromMap(Map<String, dynamic> map, BuildContext context) {
     return CartItem(
       itemID: map['item_id'] as String,
       salemanID: map['saleman_id'] as String,

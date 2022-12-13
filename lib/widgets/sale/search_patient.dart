@@ -12,6 +12,7 @@ class PatientSearchUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<PatientProvider>(
         builder: (BuildContext context, PatientProvider patPro, _) {
+      print(patPro.selectedpatient.name);
       final List<Patient> patient = patPro.patientSearch();
       return Column(children: <Widget>[
         const SizedBox(height: 30),
@@ -56,18 +57,13 @@ class PatientSearchUi extends StatelessWidget {
         RichText(
             text: TextSpan(
           text: '+ Add Patient',
-          style: const TextStyle(color: Colors.white, fontSize: 18),
-          // recognizer: TapGestureRecognizer()
-          //   ..onTap = () {
-          //     slipPro.onChanged(true);
-          //   },
+          style: const TextStyle(color: Colors.green, fontSize: 18),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              patPro.updatePatientScreen();
+              // slipPro.onChanged(true);
+            },
         )),
-        // const ForText(
-        //   name: '+ Add Patient',
-        //   fontsize: 18,
-        //   isbold: false,
-        //   color: Colors.white,
-        // ),
         const SizedBox(height: 20),
         patPro.patient.isEmpty
             ? const Center(
@@ -97,8 +93,8 @@ class PatientSearchUi extends StatelessWidget {
                           ),
                           child: ListTile(
                             onTap: () {
-                              // slipPro.onPatientUpdate(patient[index]);
-                              // slipPro.onChanged(false);
+                              patPro.selectPatient(patient[index]);
+                              Navigator.of(context).pop();
                             },
                             title: Text(
                               patient[index].name,
