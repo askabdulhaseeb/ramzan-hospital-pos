@@ -37,7 +37,7 @@ class _SaleScreenState extends State<SaleScreen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 160,
+                    height: 200,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +101,7 @@ class _SaleScreenState extends State<SaleScreen> {
                                     if (!_formKey.currentState!.validate())
                                       return;
                                     Item? item = itemPro.item(_barcode.text);
-                                    
+
                                     if (item == null) {
                                       showDialog<String>(
                                         context: context,
@@ -126,11 +126,33 @@ class _SaleScreenState extends State<SaleScreen> {
                                     Icons.save,
                                     color: Colors.grey,
                                   ),
+                                ),
+                                const SizedBox(width: 20),
+                                Container(
+                                  height: 35,
+                                  width: 300,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: const <Widget>[
+                                      Text(
+                                        'Search the patient',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                      Icon(Icons.search)
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
                           );
                         }),
+                        // Text('Patient Name:'),
+                        // Text('Mobile No:')
                       ],
                     ),
                   ),
