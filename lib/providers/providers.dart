@@ -7,6 +7,7 @@ import 'item/item_formula_provider.dart';
 import 'item/item_manufacturer_provider.dart';
 import 'item/item_provider.dart';
 import 'item/item_supplier_provider.dart';
+import 'patient_provider.dart';
 import 'sale_provider.dart';
 import 'user_provider.dart';
 
@@ -46,4 +47,5 @@ dynamic get listOfProvider => [
             value!..updatevalue(editPro),
       ),
       ChangeNotifierProvider<SaleProvider>.value(value: SaleProvider()),
+      ChangeNotifierProvider<PatientProvider>.value(value: PatientProvider()),
     ];
