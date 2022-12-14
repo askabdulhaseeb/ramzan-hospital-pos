@@ -199,7 +199,7 @@ class _SaleScreenState extends State<SaleScreen> {
                         Consumer<PatientProvider>(builder:
                             (context, PatientProvider patientpro, snapshot) {
                           return patientpro.selectedpatient.name == 'unknown'
-                              ? SizedBox()
+                              ?const SizedBox()
                               : Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
