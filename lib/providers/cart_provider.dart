@@ -80,9 +80,9 @@ class CartProvider extends ChangeNotifier {
     _cartItems.clear();
     _items.clear();
     totalNetPrice = 0;
- totalDiscount = 0;
-  customerDiscount = 0;
-  adjustment = 0;
+    totalDiscount = 0;
+    customerDiscount = 0;
+    adjustment = 0;
   }
 
   List<CartItem> _cartItems = <CartItem>[];

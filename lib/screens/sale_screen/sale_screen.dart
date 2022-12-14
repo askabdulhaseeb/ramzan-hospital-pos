@@ -199,10 +199,10 @@ class _SaleScreenState extends State<SaleScreen> {
                         Consumer<PatientProvider>(builder:
                             (context, PatientProvider patientpro, snapshot) {
                           return patientpro.selectedpatient.name == 'unknown'
-                              ?const SizedBox()
+                              ? const SizedBox()
                               : Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
+                                  children: <Widget>[
                                     Text(
                                         'Patient Name: ${patientpro.selectedpatient.name}'),
                                     Text(
