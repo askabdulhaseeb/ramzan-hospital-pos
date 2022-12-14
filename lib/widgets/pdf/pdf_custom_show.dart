@@ -102,7 +102,46 @@ class PdfCustomShow extends StatelessWidget {
     return Container(
       height: 90,
       width: 342,
-      color: Colors.black,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Text('Total Item :15'),
+              Spacer(),
+              Text('Total: '),
+              SizedBox(
+                width: 40,
+                child: Text(
+                  '500',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: const [
+            Text('Discount: '),
+            SizedBox(
+              width: 40,
+              child: Text(
+                '300',
+              ),
+            ),
+          ]),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: const [
+            Text('Total: '),
+            SizedBox(
+              width: 40,
+              child: Text(
+                '200',
+              ),
+            ),
+          ]),
+        ],
+      ),
     );
   }
 
@@ -110,7 +149,17 @@ class PdfCustomShow extends StatelessWidget {
     return Container(
       height: 90,
       width: 342,
-      color: Colors.orange,
+      child: Column(
+        children: const <Widget>[
+          Text(
+            'Return policy',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            'Return policy Return policy Return policy Return policy Return policy Return policy',
+          ),
+        ],
+      ),
     );
   }
 }
