@@ -93,15 +93,59 @@ class _SaleScreenState extends State<SaleScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                CustomTextFormField(
-                                  width: 140,
+                                SizedBox(
                                   height: 35,
-                                  hint: 'barcode add',
-                                  controller: _barcode,
-                                  color: Colors.white,
-                                  validator: (String? value) =>
-                                      CustomValidator.isEmpty(value),
+                                  width: 140,
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.search,
+                                    onFieldSubmitted: (String value) {
+                                      if (!_formKey.currentState!.validate())
+                                        return;
+                                      Item? item = itemPro.item(_barcode.text);
+
+                                      if (item == null) {
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: const Text('No item Found'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    context, 'Cancel'),
+                                                child: const Text('Cancel'),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      } else {
+                                        cartPro.addtocart(
+                                            item, int.parse(_quantity.text));
+                                      }
+                                    },
+                                    controller: _barcode,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 5.0),
+                                      ),
+                                      hintText: 'Bar code Search ',
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20.0, 15.0, 20.0, 15.0),
+                                    ),
+                                    validator: (String? value) =>
+                                        CustomValidator.isEmpty(value),
+                                  ),
                                 ),
+                                // CustomTextFormField(
+                                //   width: 140,
+                                //   height: 35,
+                                //   hint: 'barcode add',
+                                //   controller: _barcode,
+                                //   color: Colors.white,
+                                //   validator: (String? value) =>
+                                //       CustomValidator.isEmpty(value),
+                                // ),
                                 IconButton(
                                   onPressed: () {
                                     if (!_formKey.currentState!.validate())
@@ -162,7 +206,8 @@ class _SaleScreenState extends State<SaleScreen> {
                                                     height: height - 100,
                                                     width: width / 3,
                                                     //child: AddPatientUi(),
-                                                    child: PatientSearchUi(),
+                                                    child:
+                                                        const PatientSearchUi(),
                                                   );
                                                 },
                                               ),
