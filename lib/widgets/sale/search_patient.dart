@@ -26,7 +26,7 @@ class PatientSearchUi extends StatelessWidget {
               borderRadius: BorderRadius.circular(22),
               color: Theme.of(context).cardColor,
             ),
-            child: const Center(child: Text('patient')),
+            child: const Center(child: Text('Patient')),
           ),
         ),
         const SizedBox(height: 30),

@@ -13,10 +13,38 @@ class ItemProvider extends ChangeNotifier {
     return index < 0 ? null : _items[index];
   }
 
-  List<Item> _items = <Item>[];
-  List<Item> get items => _items;
   load() async {
     _items = await ItemAPI().get();
+    notifyListeners();
+  }
+
+  onSearch(String? value) {
+    _search = value;
+    notifyListeners();
+  }
+
+  List<Item> itemSearch() {
+    final List<Item> temp = <Item>[];
+    for (Item element in _items) {
+      String el = '';
+      if (selectSearch == 'Code') {
+        el = element.code;
+      } else if (selectSearch == 'Price') {
+        el = element.salePrice.toString();
+      } else {
+        el = element.name;
+      }
+      if (_search == null || (_search?.isEmpty ?? true)) {
+        temp.add(element);
+      } else if (el.toLowerCase().startsWith((_search?.toLowerCase() ?? ''))) {
+        temp.add(element);
+      }
+    }
+    return temp;
+  }
+
+  updateSelectSearch(String value) {
+    selectSearch = value;
     notifyListeners();
   }
 
@@ -35,4 +63,10 @@ class ItemProvider extends ChangeNotifier {
         quantity: 0,
         salePrice: 0,
       );
+  List<String> searchingItems = <String>['Name', 'Code', 'Price'];
+  String selectSearch = 'Name';
+
+  List<Item> _items = <Item>[];
+  List<Item> get items => _items;
+  String? _search;
 }
