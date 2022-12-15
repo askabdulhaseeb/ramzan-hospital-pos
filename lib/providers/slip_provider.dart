@@ -15,7 +15,9 @@ class SlipProvider with ChangeNotifier {
       isPaid = false;
     } else {
       isPaid = true;
+      amountPaid = total;
     }
+
     _slip = Slip(
         slipID: TimeStamp.timestamp.toString(),
         patientID: patientID,

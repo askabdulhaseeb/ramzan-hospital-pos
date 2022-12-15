@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
 import '../../widgets/sale/amount_text_field_widget.dart';
 
 class SaleTotalSide extends StatefulWidget {
@@ -72,7 +71,9 @@ class _SaleTotalSideState extends State<SaleTotalSide> {
                     cartPro.amountPaidUpdate(value);
                   }
                 },
-              )
+              ),
+              totalWidgets(
+                  'Remianing ', cartPro.netTotal() - cartPro.amountPaid),
             ],
           ),
         ),

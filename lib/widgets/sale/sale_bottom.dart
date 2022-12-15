@@ -21,35 +21,38 @@ class SaleBottom extends StatelessWidget {
       double totalBill = cartPro.netTotal();
       double customerDiscount = cartPro.customerDiscount;
       double adjustment = cartPro.adjustment;
-      double amountPaid = 0;
-      return GestureDetector(
-        onTap: () async {
-          await slipPro.addslip(patientID, totalBill, test, customerDiscount,
-              adjustment, amountPaid);
-          cartPro.emptyCart();
-        },
-        child: Container(
-          height: 160,
-          width: double.infinity,
-          color: Colors.blue,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 150,
-                padding: const EdgeInsets.symmetric(horizontal: 22),
-                decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(12)),
-                alignment: Alignment.center,
-                child: const Text(
-                  'Print',
-                  style: TextStyle(color: Colors.white, fontSize: 32),
+      double amountPaid = cartPro.amountPaid;
+      return cartPro.cartItem.isNotEmpty
+          ? GestureDetector(
+              onTap: () async {
+                await slipPro.addslip(patientID, totalBill, test,
+                    customerDiscount, adjustment, amountPaid);
+                cartPro.emptyCart();
+              },
+              child: Container(
+                height: 160,
+                width: double.infinity,
+                color: Colors.blue,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 150,
+                      padding: const EdgeInsets.symmetric(horizontal: 22),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12)),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Print',
+                        style: TextStyle(color: Colors.white, fontSize: 32),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      );
+            )
+          : SizedBox();
     });
   }
 }

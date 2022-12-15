@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import '../../providers/cart_provider.dart';
 
 class AmountTextField extends StatelessWidget {
-  const AmountTextField({required this.text, required this.hintText, this.onchange,super.key});
+  const AmountTextField(
+      {required this.text, required this.hintText, this.onchange, super.key});
   final String text;
   final String hintText;
   final String? Function(String? value)? onchange;
@@ -32,7 +33,7 @@ class AmountTextField extends StatelessWidget {
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                hintText: cartPro.adjustment.toString(),
+                hintText: hintText,
                 border: const OutlineInputBorder(),
               ),
               onChanged: onchange,

@@ -22,6 +22,7 @@ class CartProvider extends ChangeNotifier {
       _items.add(value);
       _cartItems.add(temp);
     }
+
     total();
   }
 
@@ -43,11 +44,13 @@ class CartProvider extends ChangeNotifier {
     adjustment = a;
     notifyListeners();
   }
-void amountPaidUpdate(String str) {
+
+  void amountPaidUpdate(String str) {
     double a = double.parse(str);
     amountPaid = a;
     notifyListeners();
   }
+
   double afterDiscountTestPrice(CartItem value) {
     return value.price - value.discount;
   }
@@ -67,7 +70,7 @@ void amountPaidUpdate(String str) {
   }
 
   double netTotal() {
-    return totalNetPrice - totalDiscount - customerDiscount - adjustment;
+    return totalNetPrice - totalDiscount - customerDiscount + adjustment;
   }
 
   int _indexOfSelectedIndex(String item1) {
@@ -75,8 +78,8 @@ void amountPaidUpdate(String str) {
   }
 
   delete(String id) {
-    _cartItems.removeWhere((cartItem) => cartItem.itemID == id);
-    _items.removeWhere((item) => item.id == id);
+    _cartItems.removeWhere((CartItem cartItem) => cartItem.itemID == id);
+    _items.removeWhere((Item item) => item.id == id);
     total();
   }
 
@@ -87,12 +90,13 @@ void amountPaidUpdate(String str) {
     totalDiscount = 0;
     customerDiscount = 0;
     adjustment = 0;
+    amountPaid = 0;
   }
 
-  List<CartItem> _cartItems = <CartItem>[];
+  final List<CartItem> _cartItems = <CartItem>[];
   List<CartItem> get cartItem => _cartItems;
 
-  List<Item> _items = <Item>[];
+  final List<Item> _items = <Item>[];
   List<Item> get item => _items;
   double totalNetPrice = 0;
   double totalDiscount = 0;
