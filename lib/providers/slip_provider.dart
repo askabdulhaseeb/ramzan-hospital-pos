@@ -8,17 +8,26 @@ import '../models/slip.dart';
 
 class SlipProvider with ChangeNotifier {
   Future<void> addslip(String patientID, double totalbill, List<CartItem> test,
-      double customerDiscount, double adjustment) async {
+      double customerDiscount, double adjustment, double amountPaid) async {
+    bool isPaid = false;
+    double total = totalbill + adjustment - customerDiscount;
+    if (amountPaid < total) {
+      isPaid = false;
+    } else {
+      isPaid = true;
+    }
     _slip = Slip(
         slipID: TimeStamp.timestamp.toString(),
         patientID: patientID,
         totalbill: totalbill,
         test: test,
         adjustment: adjustment,
+        amountPaid: amountPaid,
+        isPaid: isPaid,
         customerDiscount: customerDiscount);
     bool temp = await SlipAPI().add(_slip);
     if (temp) {
-      print('uploaded');
+      //print('uploaded');
     }
   }
 

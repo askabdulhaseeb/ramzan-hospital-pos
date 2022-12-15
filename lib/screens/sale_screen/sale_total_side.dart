@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/cart_provider.dart';
 import '../../widgets/custom_widgets/custom_textformfield.dart';
+import '../../widgets/sale/amount_text_field_widget.dart';
 
 class SaleTotalSide extends StatefulWidget {
   const SaleTotalSide({
@@ -30,14 +31,48 @@ class _SaleTotalSideState extends State<SaleTotalSide> {
             children: <Widget>[
               totalWidgets('Gross Total', cartPro.totalNetPrice),
               totalWidgets('Discount', cartPro.totalDiscount),
-              customDiscountWidget('Customer Discount', cartPro),
+              //customDiscountWidget('Customer Discount', cartPro),
+              AmountTextField(
+                text: 'Customer Discount',
+                hintText: cartPro.customerDiscount.toString(),
+                onchange: (String? value) {
+                  if (value!.isEmpty) {
+                    cartPro.customerDiscountUpdate('0');
+                  } else {
+                    cartPro.customerDiscountUpdate(value);
+                  }
+                },
+              ),
               totalWidgets('Net Gross Total', cartPro.grossTotal()),
-              adjustmentWidgets('Adjustment', cartPro),
+
+              AmountTextField(
+                text: 'Adjustment',
+                hintText: cartPro.adjustment.toString(),
+                onchange: (String? value) {
+                  if (value!.isEmpty) {
+                    cartPro.adjustmentUpdate('0');
+                  } else {
+                    cartPro.adjustmentUpdate(value);
+                  }
+                },
+              ),
               totalWidgets('Sales tax', 0),
               SizedBox(
                 height: height * 0.2,
               ),
-              netTotal(cartPro.netTotal())
+              netTotal(cartPro.netTotal()),
+              //amountPayableWidgets('Payable', cartPro),
+              AmountTextField(
+                text: 'Payable',
+                hintText: cartPro.amountPaid.toString(),
+                onchange: (String? value) {
+                  if (value!.isEmpty) {
+                    cartPro.amountPaidUpdate('0');
+                  } else {
+                    cartPro.amountPaidUpdate(value);
+                  }
+                },
+              )
             ],
           ),
         ),
@@ -96,78 +131,6 @@ class _SaleTotalSideState extends State<SaleTotalSide> {
                 ],
               ),
             ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget adjustmentWidgets(String text, CartProvider cartPro) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(
-              text,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          SizedBox(
-            width: 140,
-            height: 30,
-            child: TextField(
-                decoration: InputDecoration(
-                  hintText: cartPro.adjustment.toString(),
-                  enabledBorder: const OutlineInputBorder(),
-                ),
-                onChanged: (String value) {
-                  if (value.isEmpty) {
-                    cartPro.adjustmentUpdate('0');
-                  } else {
-                    cartPro.adjustmentUpdate(value);
-                  }
-                }),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget customDiscountWidget(String text, CartProvider cartPro) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(
-              text,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          SizedBox(
-            width: 140,
-            height: 30,
-            child: TextField(
-                decoration: InputDecoration(
-                  hintText: cartPro.customerDiscount.toString(),
-                  enabledBorder: const OutlineInputBorder(),
-                ),
-                onChanged: (String value) {
-                  if (value.isEmpty) {
-                    cartPro.customerDiscountUpdate('0');
-                  } else {
-                    cartPro.customerDiscountUpdate(value);
-                  }
-                }),
           )
         ],
       ),

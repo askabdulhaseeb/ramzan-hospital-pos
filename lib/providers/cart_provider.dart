@@ -43,7 +43,11 @@ class CartProvider extends ChangeNotifier {
     adjustment = a;
     notifyListeners();
   }
-
+void amountPaidUpdate(String str) {
+    double a = double.parse(str);
+    amountPaid = a;
+    notifyListeners();
+  }
   double afterDiscountTestPrice(CartItem value) {
     return value.price - value.discount;
   }
@@ -94,4 +98,5 @@ class CartProvider extends ChangeNotifier {
   double totalDiscount = 0;
   double customerDiscount = 0;
   double adjustment = 0;
+  double amountPaid = 0;
 }

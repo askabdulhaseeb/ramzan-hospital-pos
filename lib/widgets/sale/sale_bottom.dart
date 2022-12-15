@@ -21,10 +21,11 @@ class SaleBottom extends StatelessWidget {
       double totalBill = cartPro.netTotal();
       double customerDiscount = cartPro.customerDiscount;
       double adjustment = cartPro.adjustment;
+      double amountPaid = 0;
       return GestureDetector(
         onTap: () async {
-          await slipPro.addslip(
-              patientID, totalBill, test, customerDiscount, adjustment);
+          await slipPro.addslip(patientID, totalBill, test, customerDiscount,
+              adjustment, amountPaid);
           cartPro.emptyCart();
         },
         child: Container(

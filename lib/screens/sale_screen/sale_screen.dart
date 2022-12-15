@@ -26,8 +26,8 @@ class SaleScreen extends StatefulWidget {
 }
 
 class _SaleScreenState extends State<SaleScreen> {
-  TextEditingController _barcode = TextEditingController();
-  TextEditingController _quantity = TextEditingController();
+  final TextEditingController _barcode = TextEditingController();
+  final TextEditingController _quantity = TextEditingController(text: '1');
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -122,7 +122,9 @@ class _SaleScreenState extends State<SaleScreen> {
                                         cartPro.addtocart(
                                             item, int.parse(_quantity.text));
                                       }
+                                      _barcode.clear();
                                     },
+                                    autofocus: true,
                                     controller: _barcode,
                                     decoration: const InputDecoration(
                                       border: OutlineInputBorder(
