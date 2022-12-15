@@ -91,6 +91,7 @@ class CartProvider extends ChangeNotifier {
     customerDiscount = 0;
     adjustment = 0;
     amountPaid = 0;
+    notifyListeners();
   }
 
   final List<CartItem> _cartItems = <CartItem>[];

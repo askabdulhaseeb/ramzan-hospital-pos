@@ -42,7 +42,7 @@ class _SaleScreenState extends State<SaleScreen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 200,
+                    height: 150,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,21 +81,42 @@ class _SaleScreenState extends State<SaleScreen> {
                             key: _formKey,
                             child: Row(
                               children: <Widget>[
-                                const Text('salesman'),
+                                const Text('Quantity'),
                                 const SizedBox(width: 10),
-                                TitleTextFormField(
-                                  controller: _quantity,
-                                  title: 'Qty',
-                                  width: 100,
-                                  validator: (String? value) =>
-                                      CustomValidator.isEmpty(value),
+                                // TitleTextFormField(
+                                //   controller: _quantity,
+                                //   title: 'Qty',
+                                //   width: 100,
+                                //   validator: (String? value) =>
+                                //       CustomValidator.isEmpty(value),
+                                // ),
+                                SizedBox(
+                                  height: 35,
+                                  width: 150,
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.search,
+                                    onFieldSubmitted: (String value) {},
+                                    autofocus: true,
+                                    controller: _quantity,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 5.0),
+                                      ),
+                                      hintText: 'Qty ',
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20.0, 15.0, 20.0, 15.0),
+                                    ),
+                                    validator: (String? value) =>
+                                        CustomValidator.isEmpty(value),
+                                  ),
                                 ),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 SizedBox(
                                   height: 35,
-                                  width: 140,
+                                  width: 150,
                                   child: TextFormField(
                                     textInputAction: TextInputAction.search,
                                     onFieldSubmitted: (String value) {
@@ -173,6 +194,7 @@ class _SaleScreenState extends State<SaleScreen> {
                                       cartPro.addtocart(
                                           item, int.parse(_quantity.text));
                                     }
+                                    _barcode.clear();
                                   },
                                   icon: const Icon(
                                     Icons.save,
@@ -217,10 +239,10 @@ class _SaleScreenState extends State<SaleScreen> {
                                   },
                                   child: Container(
                                     height: 35,
-                                    width: 300,
+                                    width: 150,
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.black),
-                                        borderRadius: BorderRadius.circular(8)),
+                                        border: Border.all(color: Colors.grey),
+                                        borderRadius: BorderRadius.circular(3)),
                                     alignment: Alignment.center,
                                     child: Row(
                                       mainAxisAlignment:
@@ -230,7 +252,10 @@ class _SaleScreenState extends State<SaleScreen> {
                                           'Search the patient',
                                           style: TextStyle(color: Colors.grey),
                                         ),
-                                        Icon(Icons.search)
+                                        Icon(
+                                          Icons.search,
+                                          color: Colors.grey,
+                                        )
                                       ],
                                     ),
                                   ),
@@ -256,9 +281,7 @@ class _SaleScreenState extends State<SaleScreen> {
                       ],
                     ),
                   ),
-                  const Expanded(
-                    child: CustomDataTable(),
-                  ),
+                  const Expanded(child: CustomDataTable()),
                   const SaleBottom(),
                 ],
               ),
