@@ -42,8 +42,7 @@ class PatientProvider with ChangeNotifier {
   }
 
   void updatePatientScreen() {
-    print(addPatiernt);
-    addPatiernt = true;
+    addPatiernt = !addPatiernt;
     notifyListeners();
   }
 

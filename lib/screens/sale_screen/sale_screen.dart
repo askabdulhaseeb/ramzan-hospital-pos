@@ -160,13 +160,9 @@ class _SaleScreenState extends State<SaleScreen> {
 
                                                   return SizedBox(
                                                     height: height - 100,
-                                                    width: width / 2,
+                                                    width: width / 3,
                                                     //child: AddPatientUi(),
-                                                    child: patientPro
-                                                                .addPatiernt ==
-                                                            true
-                                                        ? AddPatientUi()
-                                                        : PatientSearchUi(),
+                                                    child: PatientSearchUi(),
                                                   );
                                                 },
                                               ),

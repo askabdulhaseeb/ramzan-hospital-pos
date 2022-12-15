@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/patient.dart';
 import '../../providers/patient_provider.dart';
+import 'add_patient.dart';
 
 class PatientSearchUi extends StatelessWidget {
   const PatientSearchUi({super.key});
@@ -60,7 +61,28 @@ class PatientSearchUi extends StatelessWidget {
           style: const TextStyle(color: Colors.green, fontSize: 18),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              patPro.updatePatientScreen();
+              showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        content: Builder(
+                          builder: (BuildContext context) {
+                            // Get available height and width of the build area of this widget. Make a choice depending on the size.
+                            double height = MediaQuery.of(context).size.height;
+                            double width = MediaQuery.of(context).size.width;
+
+                            return SizedBox(
+                              height: height - 100,
+                              width: width / 3,
+                              //child: AddPatientUi(),
+                              child: AddPatientUi(),
+                            );
+                          },
+                        ),
+                      ));
+
               // slipPro.onChanged(true);
             },
         )),

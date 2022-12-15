@@ -65,21 +65,25 @@ class _AddPatientUiState extends State<AddPatientUi> {
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const Text('Add patient'),
-                IconButton(
-                    onPressed: () {
-                      //slipPro.onChanged(false);
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.clear,
-                      color: Colors.red,
-                    )),
-              ],
-            ),
+            Consumer<PatientProvider>(
+                builder: (context, PatientProvider patPro, snapshot) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  const Text('Add patient'),
+                  IconButton(
+                      onPressed: () {
+                        //slipPro.onChanged(false);
+                        patPro.updatePatientScreen();
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.clear,
+                        color: Colors.red,
+                      )),
+                ],
+              );
+            }),
             const SizedBox(height: 30),
             CustomTextFormField(
               controller: _name,

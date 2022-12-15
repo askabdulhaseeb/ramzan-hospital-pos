@@ -19,17 +19,13 @@ class SaleBottom extends StatelessWidget {
       String patientID = patientPro.selectedpatient.patientID;
       List<CartItem> test = cartPro.cartItem;
       double totalBill = cartPro.netTotal();
-      double customerDiscount=cartPro.customerDiscount;
-      double adjustment=cartPro.adjustment;
+      double customerDiscount = cartPro.customerDiscount;
+      double adjustment = cartPro.adjustment;
       return GestureDetector(
         onTap: () async {
           await slipPro.addslip(
-            patientID,
-            totalBill,
-            test,
-            customerDiscount,
-            adjustment
-          );
+              patientID, totalBill, test, customerDiscount, adjustment);
+          cartPro.emptyCart();
         },
         child: Container(
           height: 160,
