@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/gestures/events.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/item/cart_item.dart';
 import '../../providers/cart_provider.dart';
+import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
 import '../../providers/slip_provider.dart';
+import '../pdf/pdf_show.dart';
 
 class SaleBottom extends StatefulWidget {
   const SaleBottom({
@@ -19,9 +22,13 @@ class _SaleBottomState extends State<SaleBottom> {
   bool isloading = true;
   @override
   Widget build(BuildContext context) {
-    return Consumer3<SlipProvider, PatientProvider, CartProvider>(builder:
-        (BuildContext context, SlipProvider slipPro, PatientProvider patientPro,
-            CartProvider cartPro, snapshot) {
+    return Consumer4<SlipProvider, PatientProvider, CartProvider, ItemProvider>(
+        builder: (BuildContext context,
+            SlipProvider slipPro,
+            PatientProvider patientPro,
+            CartProvider cartPro,
+            ItemProvider itemPro,
+            snapshot) {
       String patientID = patientPro.selectedpatient.patientID;
       List<CartItem> test = cartPro.cartItem;
       double totalBill = cartPro.netTotal();
@@ -36,33 +43,40 @@ class _SaleBottomState extends State<SaleBottom> {
                 });
                 await slipPro.addslip(patientID, totalBill, test,
                     customerDiscount, adjustment, amountPaid);
+                print('length ${slipPro.slip.test.length}');
+                print('Slip ID' + slipPro.slip.slipID);
+                await PdfInvoiceApi.generate(slipPro, itemPro, context);
                 cartPro.emptyCart();
                 setState(() {
                   isloading = true;
                 });
               },
               child: isloading
-                  ? Container(
-                      height: 160,
-                      width: double.infinity,
-                      color: Colors.blue,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 150,
-                            padding: const EdgeInsets.symmetric(horizontal: 22),
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(12)),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              'Print',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 32),
+                  ? MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Container(
+                        height: 160,
+                        width: double.infinity,
+                        color: Colors.blue,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 150,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 22),
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(12)),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'Print',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 32),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   : const CircularProgressIndicator(),

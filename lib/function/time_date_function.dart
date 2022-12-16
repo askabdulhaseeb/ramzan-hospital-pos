@@ -9,7 +9,11 @@ class TimeStamp {
     DateTime date = DateTime.fromMicrosecondsSinceEpoch(timestamp);
     return format.format(date);
   }
-
+static String timeindays(int timestamp) {
+    DateFormat format = DateFormat('dd/MM/yy');
+    DateTime date = DateTime.fromMicrosecondsSinceEpoch(timestamp);
+    return format.format(date);
+  }
   static String timeInWords(int timestamp) {
     DateTime now = DateTime.now();
     DateTime date = DateTime.fromMicrosecondsSinceEpoch(timestamp);

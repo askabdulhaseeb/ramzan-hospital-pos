@@ -1,243 +1,208 @@
-// import 'dart:io';
-// import 'package:pdf/pdf.dart';
-// import 'package:pdf/widgets.dart';
+import 'dart:io';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart';
+import 'package:printing/printing.dart';
+import 'package:provider/provider.dart';
+import '../../function/time_date_function.dart';
+import '../../providers/item/item_provider.dart';
+import '../../providers/slip_provider.dart';
 
-// import '../providers/slip_provider.dart';
-// import 'pdf_api.dart';
+import 'pdf_api.dart';
 
-// class PdfInvoiceApi {
-//   // ignore: always_specify_types
-//   static Future<File> generate(SlipProvider slipPro, context) async {
-//     final Document pdf = Document();
+class PdfInvoiceApi {
+  // ignore: always_specify_types
+  static Future<File> generate(
+      SlipProvider slipPro, ItemProvider itemPro, context) async {
+    final Document pdf = Document();
 
-//     pdf.addPage(MultiPage(
-//       pageFormat: PdfPageFormat.roll57,
-//       // ignore: always_specify_types
-//       build: (Context context) => [
-//         buildPdf(slipPro),
-//       ],
-//     ));
+    pdf.addPage(MultiPage(
+      // pageFormat: PdfPageFormat.roll57,
+      // ignore: always_specify_types
+      build: (Context context) => [
+        buildPdf(slipPro, itemPro),
+      ],
+    ));
+    return PdfApi.saveDocument(
+        name: 'Ramzan Hospital', pdf: pdf, context: context);
+  }
 
-//     return PdfApi.saveDocument(
-//         name: 'Ramzan Hospital', pdf: pdf, context: context);
-//   }
+  static Widget buildPdf(SlipProvider slipPro, ItemProvider itemPro) {
+    return Column(children: <Widget>[
+      SizedBox(
+        height: 30 * PdfPageFormat.mm,
+        width: 80 * PdfPageFormat.mm,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              buildHeader(slipPro),
+              patientData(slipPro),
+            ]),
+      ),
+      Divider(),
+      forTest(slipPro, itemPro),
+      Divider(),
+      totalBill(slipPro),
+      Divider(),
+      bottomWidget(),
+    ]);
+  }
 
-//   static Widget buildPdf(SlipProvider slipPro) {
-//     return Column(children: <Widget>[
-//       SizedBox(
-//         height: 5 * PdfPageFormat.cm,
-//         child: Column(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: <Widget>[
-//               buildHeader(slipPro),
-//               patientData(slipPro),
-//             ]),
-//       ),
-//       Divider(),
-//       SizedBox(
-//         height: 16 * PdfPageFormat.cm,
-//         child: Row(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: <Widget>[forTest(slipPro), Divider(), forDoctor()]),
-//       ),
-//       Divider(),
-//       SizedBox(
-//         height: 3 * PdfPageFormat.cm,
-//         child: Column(children: <Widget>[
-//           Row(children: <Widget>[
-//             Text('Date ', style: TextStyle(fontWeight: FontWeight.bold)),
-//             Text(TimeDateFunctions.currentTime().toString()),
-//             Expanded(child: Container()),
-//             Column(children: <Widget>[
-//               SizedBox(height: 25),
-//               Text(
-//                 'Doctor Signature',
-//               ),
-//             ]),
-//           ]),
-//           RichText(
-//             text: TextSpan(
-//               text: 'Contect ',
-//               style: const TextStyle(fontSize: 10),
-//               children: <TextSpan>[
-//                 TextSpan(
-//                   text: '+92 345 102 1122',
-//                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           RichText(
-//             text: TextSpan(
-//               text: 'Developed By ',
-//               style: const TextStyle(fontSize: 10),
-//               children: <TextSpan>[
-//                 TextSpan(
-//                   text: 'Dev Markaz',
-//                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ]),
-//       ),
-//     ]);
-//   }
+  static Widget forTest(SlipProvider slipPro, ItemProvider itemPro) {
+    return SizedBox(
+        width: 80 * PdfPageFormat.mm,
+        child: ListView.builder(
+          itemCount: slipPro.slip.test.length,
+          itemBuilder: (Context context, int index) {
+            String? medicineName =
+                itemPro.itemName(slipPro.slip.test[index].itemID);
+            int quantity = slipPro.slip.test[index].quantity;
+            double netTotal = slipPro.slip.test[index].price;
+            double discount = slipPro.slip.test[index].discount;
+            double toal = slipPro.slip.test[index].price -
+                slipPro.slip.test[index].discount;
 
-//   static Widget buildHeader(SlipProvider slipPro) {
-//     return Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: <Widget>[
-//           Column(
-//               mainAxisAlignment: MainAxisAlignment.start,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: <Widget>[
-//                 Text('Ramzan Hospital  ',
-//                     style:
-//                         TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-//                 Text('Hospital Consulting Form ',
-//                     style:
-//                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-//                 Text(
-//                   'Prescription slip ',
-//                   style: const TextStyle(
-//                     fontSize: 10,
-//                   ),
-//                 )
-//               ]),
-//           Container(
-//             height: 50,
-//             width: 50,
-//             child: BarcodeWidget(
-//               barcode: Barcode.qrCode(),
-//               data: slipPro.patient!.patientID,
-//             ),
-//           ),
-//         ]);
-//   }
+            return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  medicines(10 * PdfPageFormat.mm, quantity.toString()),
+                  medicines(25 * PdfPageFormat.mm, medicineName!),
+                  medicines(15 * PdfPageFormat.mm, netTotal.toString()),
+                  medicines(15 * PdfPageFormat.mm, discount.toString()),
+                  medicines(15 * PdfPageFormat.mm, toal.toString()),
+                ]);
+          },
+        ));
+  }
 
-//   static Widget patientData(SlipProvider slipPro) {
-//     return Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         children: <Widget>[
-//           Text(
-//             ' ${slipPro.patient!.name.toString()}    ${TimeDateFunctions.totalAge(slipPro.patient?.dob ?? 0).toString()}',
-//             style: TextStyle(
-//               fontSize: 14,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//           Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: <Widget>[
-//                 Row(children: <Widget>[
-//                   Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         Text('Contact: '),
-//                         Text('Address: '),
-//                         Text('Gender: '),
-//                       ]),
-//                   SizedBox(width: 10),
-//                   Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         Text(slipPro.patient!.phoneNumber.toString()),
-//                         Text(slipPro.patient!.address),
-//                         Text(slipPro.patient!.gender),
-//                       ]),
-//                 ]),
-//                 Row(children: <Widget>[
-//                   Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         Text('Date Time : '),
-//                         Text('Consultant: '),
-//                         Text('Department: '),
-//                       ]),
-//                   SizedBox(width: 10),
-//                   Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         Text(TimeDateFunctions.timeInDigits(
-//                                 slipPro.patient?.timestamp ?? 0)
-//                             .toString()),
-//                         Text(slipPro.doctor!.name),
-//                         Text(slipPro.department!.name),
-//                       ]),
-//                 ]),
-//               ]),
-//         ]);
-//   }
+  static SizedBox medicines(double width, String text) {
+    return SizedBox(width: width, child: Text(text));
+  }
 
-//   static Widget forTest(SlipProvider slipPro) {
-//     return SizedBox(
-//       width: 7 * PdfPageFormat.cm,
-//       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-//           Widget>[
-//         Text('Tests',
-//             style: TextStyle(
-//               fontWeight: FontWeight.bold,
-//             )),
-//         SizedBox(height: 20),
-//         Column(
-//             // ignore: always_specify_types
-//             children: List.generate(slipPro.selectedTest.length, (int index) {
-//           final String title = slipPro.selectedTest[index].test.name;
+  static SizedBox totalBill(SlipProvider slipPro) {
+    return SizedBox(
+      height: 30 * PdfPageFormat.mm,
+      width: 80 * PdfPageFormat.mm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              SizedBox(
+                width: 40 * PdfPageFormat.mm,
+                child: Text('Total Item : ${slipPro.slip.test.length}'),
+              ),
+              SizedBox(
+                  width: 40 * PdfPageFormat.mm,
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Text(
+                        'Net Total: ${slipPro.slip.totalbill + slipPro.slip.adjustment}'),
+                  ])),
+            ],
+          ),
+          Text('Discount: ${slipPro.slip.customerDiscount}'),
+          Text(
+              'Total: ${slipPro.slip.totalbill + slipPro.slip.adjustment - slipPro.slip.customerDiscount}'),
+        ],
+      ),
+    );
+  }
 
-//           return buildText(title: title);
-//         })),
-//         SizedBox(height: 20),
-//         Text('Investigation :', style: TextStyle(fontWeight: FontWeight.bold)),
-//       ]),
-//     );
-//   }
+  static SizedBox bottomWidget() {
+    return SizedBox(
+      //height: 15 * PdfPageFormat.mm,
+      width: 80 * PdfPageFormat.mm,
+      child: Column(children: <Widget>[
+        SizedBox(
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Return policy',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'Return policy Return policy ',
+                style: TextStyle(fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+        RichText(
+          text: TextSpan(
+            text: 'Contect ',
+            style: const TextStyle(fontSize: 10),
+            children: <TextSpan>[
+              TextSpan(
+                text: '+92 345 102 1122',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+        RichText(
+          text: TextSpan(
+            text: 'Developed By ',
+            style: const TextStyle(fontSize: 10),
+            children: <TextSpan>[
+              TextSpan(
+                text: 'Dev Markaz',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+      ]),
+    );
+  }
 
-//   static buildText({
-//     required String title,
-//     TextStyle? titleStyle,
-//   }) {
-//     return Container(
-//       child: Row(
-//         children: <Widget>[
-//           Expanded(child: Text(title)),
-//         ],
-//       ),
-//     );
-//   }
+  static Widget buildHeader(SlipProvider slipPro) {
+    return SizedBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Ramzan Hospital',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+          Text(
+            'innovaice',
+          ),
+        ],
+      ),
+    );
+  }
 
-//   static Widget forDoctor() {
-//     return SizedBox(
-//       width: 13 * PdfPageFormat.cm,
-//       child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           children: <Widget>[
-//             SizedBox(
-//               height: 3 * PdfPageFormat.cm,
-//               child: Text('Presenting Complaints:',
-//                   style: const TextStyle(decoration: TextDecoration.underline)),
-//             ),
-//             SizedBox(
-//               height: 3 * PdfPageFormat.cm,
-//               child: Text('History:',
-//                   style: const TextStyle(decoration: TextDecoration.underline)),
-//             ),
-//             SizedBox(
-//               height: 3 * PdfPageFormat.cm,
-//               child: Text('Examination:',
-//                   style: const TextStyle(decoration: TextDecoration.underline)),
-//             ),
-//             SizedBox(
-//               height: 1.5 * PdfPageFormat.cm,
-//               child: Text('Provisional Dignosis:',
-//                   style: const TextStyle(decoration: TextDecoration.underline)),
-//             ),
-//             Text('Treatment:',
-//                 style: const TextStyle(decoration: TextDecoration.underline)),
-//           ]),
-//     );
-//   }
-// }
+  static Widget patientData(SlipProvider slipPro) {
+    // return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+    //   Text('usman'),
+    //   Text('usman'),
+    // ]);
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: 50 * PdfPageFormat.mm,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('Inv no: ${slipPro.slip.slipID.substring(0, 5)}'),
+                  Text('   M/S:  counter sale'),
+                ]),
+          ),
+          SizedBox(
+            width: 30 * PdfPageFormat.mm,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                      'Date : ${TimeStamp.timeindays(slipPro.slip.timestamp ?? 0)}'),
+                  Text(
+                      'time: ${TimeStamp.timeInDigits(slipPro.slip.timestamp ?? 0)}'),
+                ]),
+          )
+        ]);
+  }
+}

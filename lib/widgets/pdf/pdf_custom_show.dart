@@ -23,7 +23,7 @@ class PdfCustomShow extends StatelessWidget {
   }
 
   Widget upperWidget() {
-    return Container(
+    return SizedBox(
       height: 90,
       width: 342,
       child: Column(
@@ -45,7 +45,7 @@ class PdfCustomShow extends StatelessWidget {
   }
 
   Widget customerDetail() {
-    return Container(
+    return SizedBox(
       height: 70,
       width: 342,
       child: Column(
@@ -99,7 +99,7 @@ class PdfCustomShow extends StatelessWidget {
   }
 
   Widget total() {
-    return Container(
+    return SizedBox(
       height: 90,
       width: 342,
       child: Column(
@@ -146,7 +146,7 @@ class PdfCustomShow extends StatelessWidget {
   }
 
   Widget lowerWidget() {
-    return Container(
+    return SizedBox(
       height: 90,
       width: 342,
       child: Column(

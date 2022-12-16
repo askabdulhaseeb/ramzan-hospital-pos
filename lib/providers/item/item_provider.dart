@@ -12,7 +12,12 @@ class ItemProvider extends ChangeNotifier {
         _items.indexWhere((Item element) => element.code == codeValue);
     return index < 0 ? null : _items[index];
   }
+String? itemName(String Value) {
 
+    final int index =
+        _items.indexWhere((Item element) => element.id == Value);
+    return index < 0 ? null : _items[index].name;
+  }
   load() async {
     _items = await ItemAPI().get();
     notifyListeners();

@@ -18,15 +18,18 @@ class SlipProvider with ChangeNotifier {
       amountPaid = total;
     }
 
-    _slip = Slip(
+    Slip a = Slip(
         slipID: TimeStamp.timestamp.toString(),
         patientID: patientID,
         totalbill: totalbill,
         test: test,
         adjustment: adjustment,
         amountPaid: amountPaid,
+        timestamp: TimeStamp.timestamp,
         isPaid: isPaid,
         customerDiscount: customerDiscount);
+    _slip = a;
+    notifyListeners();
     bool temp = await SlipAPI().add(_slip);
     if (temp) {
       //print('uploaded');
