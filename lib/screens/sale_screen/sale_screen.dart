@@ -16,6 +16,7 @@ import '../../widgets/sale/add_patient.dart';
 import '../../widgets/sale/sale_bottom.dart';
 import '../../widgets/sale/search_medicine.dart';
 import '../../widgets/sale/search_patient.dart';
+import '../add_item/add_item_screen.dart';
 import 'sale_total_side.dart';
 
 class SaleScreen extends StatefulWidget {
@@ -34,7 +35,34 @@ class _SaleScreenState extends State<SaleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sale Screen')),
+      appBar: AppBar(
+        title: const Text('Sale Screen'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: Row(
+              children: [
+                const Text('Add Medicines : '),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        // ignore: always_specify_types
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const AddItemScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    )),
+              ],
+            ),
+          )
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -84,13 +112,6 @@ class _SaleScreenState extends State<SaleScreen> {
                               children: <Widget>[
                                 const Text('Quantity'),
                                 const SizedBox(width: 10),
-                                // TitleTextFormField(
-                                //   controller: _quantity,
-                                //   title: 'Qty',
-                                //   width: 100,
-                                //   validator: (String? value) =>
-                                //       CustomValidator.isEmpty(value),
-                                // ),
                                 SizedBox(
                                   height: 35,
                                   width: 150,
@@ -115,93 +136,6 @@ class _SaleScreenState extends State<SaleScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                // SizedBox(
-                                //   height: 35,
-                                //   width: 150,
-                                //   child: TextFormField(
-                                //     textInputAction: TextInputAction.search,
-                                //     onFieldSubmitted: (String value) {
-                                //       if (!_formKey.currentState!.validate())
-                                //         return;
-                                //       Item? item = itemPro.item(_barcode.text);
-
-                                //       if (item == null) {
-                                //         showDialog<String>(
-                                //           context: context,
-                                //           builder: (BuildContext context) =>
-                                //               AlertDialog(
-                                //             title: const Text('No item Found'),
-                                //             actions: <Widget>[
-                                //               TextButton(
-                                //                 onPressed: () => Navigator.pop(
-                                //                     context, 'Cancel'),
-                                //                 child: const Text('Cancel'),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         );
-                                //       } else {
-                                //         cartPro.addtocart(
-                                //             item, int.parse(_quantity.text));
-                                //       }
-                                //       _barcode.clear();
-                                //     },
-                                //     autofocus: true,
-                                //     controller: _barcode,
-                                //     decoration: const InputDecoration(
-                                //       border: OutlineInputBorder(
-                                //         borderSide: BorderSide(
-                                //             color: Colors.red, width: 5.0),
-                                //       ),
-                                //       hintText: 'Bar code Search ',
-                                //       contentPadding: EdgeInsets.fromLTRB(
-                                //           20.0, 15.0, 20.0, 15.0),
-                                //     ),
-                                //     validator: (String? value) =>
-                                //         CustomValidator.isEmpty(value),
-                                //   ),
-                                // ),
-                                // CustomTextFormField(
-                                //   width: 140,
-                                //   height: 35,
-                                //   hint: 'barcode add',
-                                //   controller: _barcode,
-                                //   color: Colors.white,
-                                //   validator: (String? value) =>
-                                //       CustomValidator.isEmpty(value),
-                                // ),
-                                // IconButton(
-                                //   onPressed: () {
-                                //     if (!_formKey.currentState!.validate())
-                                //       return;
-                                //     Item? item = itemPro.item(_barcode.text);
-
-                                //     if (item == null) {
-                                //       showDialog<String>(
-                                //         context: context,
-                                //         builder: (BuildContext context) =>
-                                //             AlertDialog(
-                                //           title: const Text('No item Found'),
-                                //           actions: <Widget>[
-                                //             TextButton(
-                                //               onPressed: () => Navigator.pop(
-                                //                   context, 'Cancel'),
-                                //               child: const Text('Cancel'),
-                                //             ),
-                                //           ],
-                                //         ),
-                                //       );
-                                //     } else {
-                                //       cartPro.addtocart(
-                                //           item, int.parse(_quantity.text));
-                                //     }
-                                //     _barcode.clear();
-                                //   },
-                                //   icon: const Icon(
-                                //     Icons.save,
-                                //     color: Colors.grey,
-                                //   ),
-                                // ),
                                 GestureDetector(
                                   onTap: () {
                                     showDialog(
