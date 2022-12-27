@@ -3,6 +3,7 @@ import 'package:flutter/src/gestures/events.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/item/cart_item.dart';
+import '../../models/transaction.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
@@ -43,6 +44,8 @@ class _SaleBottomState extends State<SaleBottom> {
                 });
                 await slipPro.addslip(patientID, totalBill, test,
                     customerDiscount, adjustment, amountPaid);
+                    
+                    
                 print('length ${slipPro.slip.test.length}');
                 print('Slip ID' + slipPro.slip.slipID);
                 await PdfInvoiceApi.generate(slipPro, itemPro, context);

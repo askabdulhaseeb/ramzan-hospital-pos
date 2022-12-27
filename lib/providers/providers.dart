@@ -10,6 +10,7 @@ import 'item/item_supplier_provider.dart';
 import 'patient_provider.dart';
 import 'sale_provider.dart';
 import 'slip_provider.dart';
+import 'transaction_provider.dart';
 import 'user_provider.dart';
 
 // ignore: always_specify_types
@@ -17,6 +18,7 @@ dynamic get listOfProvider => [
       ChangeNotifierProvider<ItemProvider>(create: (_) => ItemProvider()),
       ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
       ChangeNotifierProvider<SlipProvider>(create: (_) => SlipProvider()),
+      ChangeNotifierProvider<TransactionProvider>(create: (_) => TransactionProvider()),
       ChangeNotifierProvider<CartProvider>(
         create: (_) => CartProvider(),
       ),

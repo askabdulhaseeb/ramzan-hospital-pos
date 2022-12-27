@@ -3,7 +3,7 @@ import 'package:firedart/firedart.dart';
 import '../models/transaction.dart';
 
 class TransactionAPI {
-  CollectionReference collection = Firestore.instance.collection('slip');
+  CollectionReference collection = Firestore.instance.collection('transaction');
   Future<bool> add(Transaction value) async {
     bool res = false;
     try {

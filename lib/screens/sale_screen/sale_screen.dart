@@ -2,10 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/transaction.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
 import '../../providers/sale_provider.dart';
+import '../../providers/transaction_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
 
@@ -15,6 +17,7 @@ import '../../widgets/data_table/data_table.dart';
 import '../../widgets/sale/sale_bottom.dart';
 import '../../widgets/sale/search_medicine.dart';
 import '../../widgets/sale/search_patient.dart';
+import '../../widgets/sale/transaction_widget.dart';
 import '../add_item/add_item_screen.dart';
 import 'sale_total_side.dart';
 
@@ -200,9 +203,13 @@ class _SaleScreenState extends State<SaleScreen> {
                             ),
                           );
                         }),
-                        Consumer<PatientProvider>(builder:
-                            (BuildContext context, PatientProvider patientpro,
+                        Consumer2<PatientProvider, TransactionProvider>(builder:
+                            (BuildContext context,
+                                PatientProvider patientpro,
+                                TransactionProvider transactionPro,
                                 Widget? snapshot) {
+                          List<Transaction> transactions = transactionPro
+                              .searchUser(patientpro.selectedpatient.patientID);
                           return patientpro.selectedpatient.name == 'unknown'
                               ? const SizedBox()
                               : Row(
@@ -219,7 +226,41 @@ class _SaleScreenState extends State<SaleScreen> {
                                     ),
                                     const SizedBox(width: 30),
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                         showDialog(
+                                        context: context,
+                                        builder: (_) => AlertDialog(
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0))),
+                                              content: Builder(
+                                                builder:
+                                                    (BuildContext context) {
+                                                  
+                                                  double height =
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .height;
+                                                  double width =
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width;
+
+                                                  return SizedBox(
+                                                    height: height - 100,
+                                                    width: width / 3,
+                                                    //child: AddPatientUi(),
+                                                    child:TransactionsSearch(
+                                                      transactions: transactions,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ));
+                                      },
                                       child: const Text('Record'),
                                     )
                                   ],
