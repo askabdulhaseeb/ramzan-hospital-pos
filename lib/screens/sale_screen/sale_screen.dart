@@ -2,17 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/item/item.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
 import '../../providers/sale_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
-import '../../widgets/custom_widgets/custom_textformfield.dart';
-import '../../widgets/custom_widgets/title_textformfield.dart';
+
 import '../../widgets/data_table/data_table.dart';
-import '../../widgets/sale/add_patient.dart';
+
 import '../../widgets/sale/sale_bottom.dart';
 import '../../widgets/sale/search_medicine.dart';
 import '../../widgets/sale/search_patient.dart';
