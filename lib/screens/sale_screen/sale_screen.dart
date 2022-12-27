@@ -9,6 +9,7 @@ import '../../providers/sale_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
 
+import '../../widgets/custom_widgets/custom_elevated_button.dart';
 import '../../widgets/data_table/data_table.dart';
 
 import '../../widgets/sale/sale_bottom.dart';
@@ -204,13 +205,23 @@ class _SaleScreenState extends State<SaleScreen> {
                                 Widget? snapshot) {
                           return patientpro.selectedpatient.name == 'unknown'
                               ? const SizedBox()
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                        'Patient Name: ${patientpro.selectedpatient.name}'),
-                                    Text(
-                                        'Mobile No: ${patientpro.selectedpatient.phoneNumber}')
+                              : Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                            'Patient Name: ${patientpro.selectedpatient.name}'),
+                                        Text(
+                                            'Mobile No: ${patientpro.selectedpatient.phoneNumber}')
+                                      ],
+                                    ),
+                                    const SizedBox(width: 30),
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text('Record'),
+                                    )
                                   ],
                                 );
                         }),
