@@ -73,7 +73,6 @@ class _SaleScreenState extends State<SaleScreen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 150,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,39 +226,40 @@ class _SaleScreenState extends State<SaleScreen> {
                                     const SizedBox(width: 30),
                                     ElevatedButton(
                                       onPressed: () {
-                                         showDialog(
-                                        context: context,
-                                        builder: (_) => AlertDialog(
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0))),
-                                              content: Builder(
-                                                builder:
-                                                    (BuildContext context) {
-                                                  
-                                                  double height =
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .height;
-                                                  double width =
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width;
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) => AlertDialog(
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10.0))),
+                                                  content: Builder(
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      double height =
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .height;
+                                                      double width =
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width;
 
-                                                  return SizedBox(
-                                                    height: height - 100,
-                                                    width: width / 3,
-                                                    //child: AddPatientUi(),
-                                                    child:TransactionsSearch(
-                                                      transactions: transactions,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ));
+                                                      return SizedBox(
+                                                        height: height - 100,
+                                                        width: width / 3,
+                                                        //child: AddPatientUi(),
+                                                        child:
+                                                            TransactionsSearch(
+                                                          transactions:
+                                                              transactions,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ));
                                       },
                                       child: const Text('Record'),
                                     )

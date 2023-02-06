@@ -11,9 +11,7 @@ import '../../providers/slip_provider.dart';
 import '../pdf/pdf_show.dart';
 
 class SaleBottom extends StatefulWidget {
-  const SaleBottom({
-    Key? key,
-  }) : super(key: key);
+  const SaleBottom({Key? key}) : super(key: key);
 
   @override
   State<SaleBottom> createState() => _SaleBottomState();
@@ -44,8 +42,7 @@ class _SaleBottomState extends State<SaleBottom> {
                 });
                 await slipPro.addslip(patientID, totalBill, test,
                     customerDiscount, adjustment, amountPaid);
-                    
-                    
+
                 print('length ${slipPro.slip.test.length}');
                 print('Slip ID' + slipPro.slip.slipID);
                 await PdfInvoiceApi.generate(slipPro, itemPro, context);
@@ -58,7 +55,6 @@ class _SaleBottomState extends State<SaleBottom> {
                   ? MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: Container(
-                        height: 160,
                         width: double.infinity,
                         color: Colors.blue,
                         child: Column(
