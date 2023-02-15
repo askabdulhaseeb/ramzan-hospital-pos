@@ -59,7 +59,7 @@ class _SaleBottomState extends State<SaleBottom> {
                         color: Colors.blue,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: <Widget>[
                             Container(
                               width: 150,
                               padding:
