@@ -5,9 +5,7 @@ import '../../providers/cart_provider.dart';
 import '../../widgets/sale/amount_text_field_widget.dart';
 
 class SaleTotalSide extends StatefulWidget {
-  const SaleTotalSide({
-    Key? key,
-  }) : super(key: key);
+  const SaleTotalSide({Key? key}) : super(key: key);
 
   @override
   State<SaleTotalSide> createState() => _SaleTotalSideState();
@@ -23,7 +21,7 @@ class _SaleTotalSideState extends State<SaleTotalSide> {
       width: 300,
       color: const Color(0xff9bcdc6),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: height * 0.1),
+        padding: const EdgeInsets.symmetric(horizontal: 14),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

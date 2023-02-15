@@ -73,7 +73,6 @@ class _SaleScreenState extends State<SaleScreen> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 150,
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

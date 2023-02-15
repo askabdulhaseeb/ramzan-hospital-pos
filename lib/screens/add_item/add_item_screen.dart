@@ -128,11 +128,11 @@ class _AddItemScreenState extends State<AddItemScreen> {
                                     CustomValidator.greaterThen(
                                         value, _averagePrice.text),
                               ),
-                              CustomTitleTextFormField(
-                                controller: _discount,
-                                title: 'Discount',
-                                validator: (String? value) => null,
-                              ),
+                              // CustomTitleTextFormField(
+                              //   controller: _discount,
+                              //   title: 'Discount',
+                              //   validator: (String? value) => null,
+                              // ),
                             ],
                           ),
                         ),
@@ -154,7 +154,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       title: 'Edit',
                       icon: Icons.edit,
                       bgColor: Colors.greenAccent,
-                      onTap: () async{
+                      onTap: () async {
                         await itemPro.load();
                         // ignore: use_build_context_synchronously
                         Navigator.push(
@@ -168,16 +168,16 @@ class _AddItemScreenState extends State<AddItemScreen> {
                       },
                     ),
                     const SizedBox(width: 20),
-                    CustomIconButton(
-                      title: 'Remove',
-                      icon: Icons.remove,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                        horizontal: 16,
-                      ),
-                      bgColor: Colors.red,
-                      onTap: () {},
-                    ),
+                    // CustomIconButton(
+                    //   title: 'Remove',
+                    //   icon: Icons.remove,
+                    //   padding: const EdgeInsets.symmetric(
+                    //     vertical: 8,
+                    //     horizontal: 16,
+                    //   ),
+                    //   bgColor: Colors.red,
+                    //   onTap: () {},
+                    // ),
                   ],
                 ),
               ],
@@ -213,24 +213,24 @@ class _AddItemScreenState extends State<AddItemScreen> {
       quantity: int.parse(_qty.text),
       averagePrice: double.parse(_averagePrice.text),
       salePrice: double.parse(_salePrice.text),
-      discount: double.parse(_discount.text),
+      discount: _discount.text.isEmpty ? 0.0 : double.parse(_discount.text),
     );
     bool temp = await ItemAPI().add(value);
-    if (temp) {
-      // ignore: use_build_context_synchronously
-      Navigator.push(
-        context,
-        // ignore: always_specify_types
-        MaterialPageRoute(
-          builder: (BuildContext context) => const SaleScreen(),
-        ),
-      );
-      _name.clear();
-      _barcode.clear();
-      _qty.clear();
-      _averagePrice.clear();
-      _salePrice.clear();
-      _discount.clear();
-    }
+    // if (temp) {
+    //   // ignore: use_build_context_synchronously
+    //   Navigator.push(
+    //     context,
+    //     // ignore: always_specify_types
+    //     MaterialPageRoute(
+    //       builder: (BuildContext context) => const SaleScreen(),
+    //     ),
+    //   );
+    _name.clear();
+    _barcode.clear();
+    _qty.clear();
+    _averagePrice.clear();
+    _salePrice.clear();
+    _discount.clear();
+    // }
   }
 }
