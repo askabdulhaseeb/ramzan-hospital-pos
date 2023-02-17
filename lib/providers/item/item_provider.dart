@@ -28,6 +28,17 @@ class ItemProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String maxQuantity(String quantity, Item item) {
+    int qua = int.parse(quantity);
+
+    if (qua < item.quantity) {
+      return qua.toString();
+    } else {
+      return item.quantity.toString();
+    }
+  
+  }
+
   List<Item> itemSearch() {
     final List<Item> temp = <Item>[];
     for (Item element in _items) {

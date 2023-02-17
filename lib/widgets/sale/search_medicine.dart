@@ -17,6 +17,7 @@ class SearchMedicine extends StatelessWidget {
     ItemProvider itemPro = Provider.of<ItemProvider>(context);
     CartProvider cartPro = Provider.of<CartProvider>(context);
     final List<Item> items = itemPro.itemSearch();
+
     return Column(children: <Widget>[
       const SizedBox(height: 30),
       Padding(
@@ -82,6 +83,7 @@ class SearchMedicine extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
+                    String quan = itemPro.maxQuantity(quantity, items[index]);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -101,8 +103,7 @@ class SearchMedicine extends StatelessWidget {
                         child: ListTile(
                           onTap: () {
                             // patPro.selectPatient(patient[index]);
-                            cartPro.addtocart(
-                                items[index], int.parse(quantity));
+                            cartPro.addtocart(items[index], int.parse(quan));
                             Navigator.of(context).pop();
                           },
                           title: Text(
@@ -140,7 +141,7 @@ class SearchMedicine extends StatelessWidget {
     ]);
   }
 
-  SizedBox SearchItems(ItemProvider itemPro) {
+  Widget SearchItems(ItemProvider itemPro) {
     return SizedBox(
       height: 50,
       child: ListView.builder(

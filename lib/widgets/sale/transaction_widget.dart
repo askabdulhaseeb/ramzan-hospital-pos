@@ -65,7 +65,7 @@ class TransactionsSearch extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(transactions[index].remainingBill.toString())
                       ],
                     ),
