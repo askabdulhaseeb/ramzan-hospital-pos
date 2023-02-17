@@ -22,15 +22,15 @@ class AppUser {
     };
   }
 
-  factory AppUser.fromMap(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory AppUser.fromMap(Map<String, dynamic> doc) {
     return AppUser(
-      uid: doc.data()!['uid'] as String,
-      name: doc.data()!['name'] != null ? doc.data()!['name'] as String : null,
-      imageURL: doc.data()!['imageURL'] != null
-          ? doc.data()!['imageURL'] as String
+      uid: doc['uid'] as String,
+      name: doc['name'] != null ? doc['name'] as String : null,
+      imageURL: doc['imageURL'] != null
+          ? doc['imageURL'] as String
           : null,
-      contact: doc.data()!['contact'] != null
-          ? doc.data()!['contact'] as String
+      contact: doc['contact'] != null
+          ? doc['contact'] as String
           : null,
     );
   }

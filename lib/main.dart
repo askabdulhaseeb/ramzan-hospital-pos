@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'providers/providers.dart';
 
+import 'screens/auth/login_screen.dart';
 import 'screens/sale_screen/sale_screen.dart';
 import 'screens/screens.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SaleScreen(),
+        home: const SignInScreen(),
         routes: registeredRoutes,
       ),
     );

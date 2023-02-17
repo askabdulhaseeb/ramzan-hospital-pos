@@ -22,6 +22,7 @@ dependencies:
   data_table_2: ^2.3.8
   pdf: ^3.8.4
   printing: ^5.9.3
+  shared_preferences: ^2.0.17
  
 
 dev_dependencies:
