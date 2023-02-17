@@ -207,6 +207,7 @@ class _SaleScreenState extends State<SaleScreen> {
                                 PatientProvider patientpro,
                                 TransactionProvider transactionPro,
                                 Widget? snapshot) {
+                           transactionPro.loadData();
                           List<Transaction> transactions = transactionPro
                               .searchUser(patientpro.selectedpatient.patientID);
                           return patientpro.selectedpatient.name == 'unknown'

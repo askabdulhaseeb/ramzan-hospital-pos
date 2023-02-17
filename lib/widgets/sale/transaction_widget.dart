@@ -54,14 +54,20 @@ class TransactionsSearch extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    title: Text(
-                      TimeStamp.timeindays(transactions[index].timestamp),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+                    title: Row(
+                      children: [
+                        Text(
+                          TimeStamp.timeindays(transactions[index].timestamp),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              color: Colors.black54,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Text(transactions[index].remainingBill.toString())
+                      ],
                     ),
                     trailing: ElevatedButton(
                       onPressed: () {},
