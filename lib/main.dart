@@ -8,7 +8,7 @@ import 'screens/sale_screen/sale_screen.dart';
 import 'screens/screens.dart';
 
 const apiKey = 'AIzaSyBv5U-vIa00We8z553brPBQNexAzsICDDQ';
-const projectID = 'ramzanhospital-qds';
+const projectID = 'ramzanhospital-qds';  
 void main() {
   Firestore.initialize(projectID);
   FirebaseAuth.initialize(apiKey, VolatileStore());

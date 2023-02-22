@@ -42,7 +42,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
   Widget build(BuildContext context) {
     ItemProvider itemPro = Provider.of<ItemProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('AddItemScreen')),
+      appBar: AppBar(title: const Text('Add Item Screen')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
