@@ -54,6 +54,7 @@ class ItemCatProvider extends ChangeNotifier {
   }
 
   updatesubCategory(ItemSubCategory value) {
+   // _selectedSubCat=value;
     _selectedCat!.subCategories.add(value);
     notifyListeners();
   }
@@ -65,6 +66,7 @@ class ItemCatProvider extends ChangeNotifier {
   bool edit = false;
 
   void updateCatSelection(ItemCategory? updatedCategroy) {
+    print( 'ya provider main aya ha'+updatedCategroy!.title);
     _selectedCat = updatedCategroy;
     _subCategory = updatedCategroy == null
         ? <ItemSubCategory>[]

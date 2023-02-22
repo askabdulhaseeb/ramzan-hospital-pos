@@ -5,9 +5,15 @@ import 'package:flutter/material.dart';
 
 import '../../../utilities/utilities.dart';
 
-class LineItemDropdown extends StatelessWidget {
+class LineItemDropdown extends StatefulWidget {
   const LineItemDropdown({super.key});
 
+  @override
+  State<LineItemDropdown> createState() => _LineItemDropdownState();
+}
+
+class _LineItemDropdownState extends State<LineItemDropdown> {
+  List<String> totalItems=['1', '2', '3'];
   @override
   Widget build(BuildContext context) {
     return Row(

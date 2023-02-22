@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../database/item_api/categories_api.dart';
 import '../../../models/item/item_category.dart';
 import '../../../models/item/item_sub_category.dart';
+import '../../../providers/cart_provider.dart';
 import '../../../providers/item/item_category_provider.dart';
 import '../../../utilities/custom_validator.dart';
 import '../../../utilities/utilities.dart';
@@ -39,7 +40,7 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
   @override
   Widget build(BuildContext context) {
     ItemCatProvider catPro = Provider.of<ItemCatProvider>(context);
-    final List<ItemSubCategory> cats = catPro.subCategory;
+    final List<ItemSubCategory> subCart = catPro.subCategory;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -55,39 +56,73 @@ class _ItemSubCatDropdownState extends State<ItemSubCatDropdown> {
             child: Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-              child: DropdownFormField<ItemSubCategory>(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  suffixIcon: const Icon(Icons.arrow_drop_down),
-                  labelText: (catPro.edit)
-                      // ignore: unnecessary_null_comparison
-                      ? catPro.selectedSubCategory == null
-                          ? 'sub category'
-                          : catPro.selectedSubCategory!.title
-                      : 'sub category',
-                ),
-                onChanged: (dynamic str) =>
-                    catPro.updateSubCategorySection(str),
-                validator: (dynamic str) {
-                  if (catPro.selectedCategroy == null) {
-                    return 'Select Sub Category';
-                  }
-                  return null;
-                },
-                displayItemFn: (dynamic value) => Text(
-                  value?.title ?? '',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                findFn: (dynamic str) async => cats,
-                filterFn: (dynamic value, String str) =>
-                    value.title.toLowerCase().indexOf(str.toLowerCase()) >= 0,
-                dropdownItemFn: (dynamic value, int position, bool focused,
-                        dynamic lastSelectedItem, dynamic onTap) =>
-                    ListTile(
-                  title: Text(value.title),
-                  onTap: onTap,
-                ),
+                   child: DropdownButtonFormField<ItemSubCategory>(
+                 // isExpanded: true,
+                       decoration: const InputDecoration(
+                border:OutlineInputBorder(),
+                //suffixIcon: Icon(Icons.arrow_drop_down),
+                    // labelText: (catPro.edit)
+                    //   // ignore: unnecessary_null_comparison
+                    //   ? catPro.selectedSubCategory == null
+                    //       ? 'sub category'
+                    //       : catPro.selectedSubCategory!.title
+                    //   : 'sub category',
+                // labelText:
+                //     (catPro.edit) ? catPro.selectedCategroy==null?'category' :catPro.selectedCategroy!.title : 'category',
               ),
+                alignment: Alignment.centerLeft,
+               value:catPro .selectedSubCategory,
+                style: const TextStyle(color: Colors.black),
+                //underline: const SizedBox(),
+                hint: const Text(
+                  '',
+                  style: TextStyle(color: Colors.black),
+                ),
+                items:catPro.subCategory.isEmpty?[]: catPro.subCategory
+                    .map((ItemSubCategory subCat) => DropdownMenuItem<ItemSubCategory>(
+                          value: subCat,
+                          child: Text(
+                            subCat.title.toUpperCase(),
+                            style: const TextStyle(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (ItemSubCategory? value) =>
+                    catPro. updateSubCategorySection(value!),
+              ),
+              // child: DropdownFormField<ItemSubCategory>(
+              //   decoration: InputDecoration(
+              //     border: const OutlineInputBorder(),
+              //     suffixIcon: const Icon(Icons.arrow_drop_down),
+              //     labelText: (catPro.edit)
+              //         // ignore: unnecessary_null_comparison
+              //         ? catPro.selectedSubCategory == null
+              //             ? 'sub category'
+              //             : catPro.selectedSubCategory!.title
+              //         : 'sub category',
+              //   ),
+              //   onChanged: (dynamic str) =>
+              //       catPro.updateSubCategorySection(str),
+              //   validator: (dynamic str) {
+              //     if (catPro.selectedCategroy == null) {
+              //       return 'Select Sub Category';
+              //     }
+              //     return null;
+              //   },
+              //   displayItemFn: (dynamic value) => Text(
+              //     value?.title ?? '',
+              //     style: const TextStyle(fontSize: 16),
+              //   ),
+              //   findFn: (dynamic str) async => cats,
+              //   filterFn: (dynamic value, String str) =>
+              //       value.title.toLowerCase().indexOf(str.toLowerCase()) >= 0,
+              //   dropdownItemFn: (dynamic value, int position, bool focused,
+              //           dynamic lastSelectedItem, dynamic onTap) =>
+              //       ListTile(
+              //     title: Text(value.title),
+              //     onTap: onTap,
+              //   ),
+              // ),
             ),
           ),
           (catPro.edit)

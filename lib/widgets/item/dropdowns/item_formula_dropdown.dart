@@ -52,33 +52,35 @@ class _ItemFormulaDropdownState extends State<ItemFormulaDropdown> {
           child:  Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-              child: DropdownFormField<ItemFormula>(
-                decoration:  InputDecoration(
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText:  (formulaPro.edit) ? formulaPro.selectedFormula==null?'Formula' :formulaPro.selectedFormula!.formula : 'Formula',
+                  child: DropdownButtonFormField<ItemFormula>(
+                     isExpanded: true,
+                       decoration: InputDecoration(
+                border:const OutlineInputBorder(),
+                //suffixIcon: Icon(Icons.arrow_drop_down),
+                    labelText:  (formulaPro.edit) ? formulaPro.selectedFormula==null?'Formula' :formulaPro.selectedFormula!.formula : 'Formula',
                 ),
-                onChanged: (dynamic str) => formulaPro.onFormulaUpdate(str),
-                validator: (dynamic str) {
-                  if (formulaPro.selectedFormula == null) {
-                    return 'Select Formula';
-                  }
-                  return null;
-                },
-                displayItemFn: (dynamic value) => Text(
-                  value?.formula ?? '',
-                  style: const TextStyle(fontSize: 16),
+                alignment: Alignment.centerLeft,
+                //value: formulaPro.selectedFormula,
+                style: const TextStyle(color: Colors.black),
+                //underline: const SizedBox(),
+                hint: const Text(
+                  '',
+                  style: TextStyle(color: Colors.black),
                 ),
-                findFn: (dynamic str) async => formulas,
-                filterFn: (dynamic value, String str) =>
-                    value.formula.toLowerCase().indexOf(str.toLowerCase()) >= 0,
-                dropdownItemFn: (dynamic value, int position, bool focused,
-                        dynamic lastSelectedItem, dynamic onTap) =>
-                    ListTile(
-                  title: Text(value.formula),
-                  onTap: onTap,
-                ),
+                items: formulaPro.formulas
+                    .map((ItemFormula cats) => DropdownMenuItem<ItemFormula>(
+                          value: cats,
+                          child: Text(
+                           // overflow: TextOverflow.ellipsis,
+                            cats.formula.toUpperCase(),
+                            style: const TextStyle(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (ItemFormula? value) =>
+                    formulaPro.onFormulaUpdate(value),
               ),
+            
             ),
         ),
        formulaPro.edit

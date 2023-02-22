@@ -55,34 +55,65 @@ class _ItemCatDropdownState extends State<ItemCatDropdown> {
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-            child: DropdownFormField<ItemCategory>(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.arrow_drop_down),
+                child: DropdownButtonFormField<ItemCategory>(
+                  isExpanded: true,
+                       decoration: InputDecoration(
+                border:const OutlineInputBorder(),
+                //suffixIcon: Icon(Icons.arrow_drop_down),
                 labelText:
                     (catPro.edit) ? catPro.selectedCategroy==null?'category' :catPro.selectedCategroy!.title : 'category',
               ),
-              onChanged: (dynamic str) => catPro.updateCatSelection(str),
-              validator: (dynamic str) {
-                if (catPro.selectedCategroy == null) {
-                  return 'Select Category';
-                }
-                return null;
-              },
-              displayItemFn: (dynamic value) => Text(
-                value?.title ?? '',
-                style: const TextStyle(fontSize: 16),
+                alignment: Alignment.centerLeft,
+                value: catPro.selectedCategroy,
+                style: const TextStyle(color: Colors.black),
+                //underline: const SizedBox(),
+                hint: const Text(
+                  '',
+                  style: TextStyle(color: Colors.black),
+                ),
+                items: catPro.category
+                    .map((ItemCategory cats) => DropdownMenuItem<ItemCategory>(
+                          value: cats,
+                          child: Text(
+                            cats.title.toUpperCase(),
+                            style: const TextStyle(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (ItemCategory? value) =>
+                    catPro.updateCatSelection(value!),
               ),
-              findFn: (dynamic str) async => cats,
-              filterFn: (dynamic value, String str) =>
-                  value.title.toLowerCase().indexOf(str.toLowerCase()) >= 0,
-              dropdownItemFn: (dynamic value, int position, bool focused,
-                      dynamic lastSelectedItem, dynamic onTap) =>
-                  ListTile(
-                title: Text(value.title),
-                onTap: onTap,
-              ),
-            ),
+          //   child: DropdownFormField<ItemCategory>(
+          //     decoration: InputDecoration(
+          //       border: OutlineInputBorder(),
+          //       suffixIcon: Icon(Icons.arrow_drop_down),
+          //       labelText:
+          //           (catPro.edit) ? catPro.selectedCategroy==null?'category' :catPro.selectedCategroy!.title : 'category',
+          //     ),
+          //     onChanged: (ItemCategory str){
+          //  print('chal ha');
+          //     catPro.updateCatSelection(str);
+          //     },
+          //     validator: (ItemCategory? str) {
+          //       if (catPro.selectedCategroy == null) {
+          //         return 'Select Category';
+          //       }
+          //       return null;
+          //     },
+          //     displayItemFn: (dynamic value) => Text(
+          //       value?.title ?? '',
+          //       style: const TextStyle(fontSize: 16),
+          //     ),
+          //     findFn: (dynamic str) async => cats,
+          //     filterFn: (dynamic value, String str) =>
+          //         value.title.toLowerCase().indexOf(str.toLowerCase()) >= 0,
+          //     dropdownItemFn: (dynamic value, int position, bool focused,
+          //             dynamic lastSelectedItem, dynamic onTap) =>
+          //         ListTile(
+          //       title: Text(value.title),
+          //       onTap: onTap,
+          //     ),
+          //   ),
           ),
         ),
         catPro.edit
