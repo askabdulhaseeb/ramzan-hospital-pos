@@ -134,8 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                           FirebaseAuth.instance;
                                       final User user = await auth.signIn(
                                           _email.text, _password.text);
-                                      final AppUser appUser =
-                                          await UserAPI().user(user.id);
+                                      
 
                                       if (!mounted) return;
                                       Navigator.of(context)

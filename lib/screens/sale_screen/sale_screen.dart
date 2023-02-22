@@ -161,8 +161,11 @@ class _SaleScreenState extends State<SaleScreen> {
                                                           .size
                                                           .width;
 
-                                                  return SizedBox(
-                                                    height: height - 100,
+                                                  return Container(
+                                                    constraints: BoxConstraints(
+                                                      maxHeight:1000,minHeight: 200, 
+                                                    ),
+                                                    
                                                     width: width / 3,
                                                     //child: AddPatientUi(),
                                                     child: SearchMedicine(
