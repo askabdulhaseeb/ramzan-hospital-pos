@@ -7,6 +7,7 @@ import '../../models/patient.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
+import '../custom_widgets/custom_toast.dart';
 import 'add_patient.dart';
 
 class SearchMedicine extends StatelessWidget {
@@ -89,7 +90,11 @@ class SearchMedicine extends StatelessWidget {
                    primary: false,
                     itemCount: items.length,
                     itemBuilder: (BuildContext context, int index) {
-                      String quan = itemPro.maxQuantity(quantity, items[index]);
+                      String quan='0';
+//                       Future.delayed(Duration.zero, () async {
+// quan = itemPro.maxQuantity(quantity, itemPro ,index);
+// });
+                      //String quan = itemPro.maxQuantity(quantity, itemPro ,index);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
@@ -109,8 +114,10 @@ class SearchMedicine extends StatelessWidget {
                           //child: Text(items[index].name),
                           child: ListTile(
                             onTap: () {
+                              quan = itemPro.maxQuantity(quantity, itemPro ,index);
                               // patPro.selectPatient(patient[index]);
-                              cartPro.addtocart(items[index], int.parse(quan));
+                            itemPro.isAvaliable?SizedBox() : CustomToast.errorSnackBar(context: context, text: 'Quantity exceed the limit');
+                            cartPro.addtocart(items[index], int.parse(quan));
                               Navigator.of(context).pop();
                             },
                             title: Text(

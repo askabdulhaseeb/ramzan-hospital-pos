@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/events.dart';
 import 'package:provider/provider.dart';
 
+import '../../database/item_api/item_api.dart';
 import '../../models/item/cart_item.dart';
+import '../../models/item/item.dart';
 import '../../models/transaction.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
@@ -40,10 +42,17 @@ class _SaleBottomState extends State<SaleBottom> {
                 setState(() {
                   isloading = false;
                 });
-                await slipPro.addslip(patientID, totalBill, test,
+                List<Item> itemsList=[];
+                 await slipPro.addslip(patientID, totalBill, test,
                     customerDiscount, adjustment, amountPaid);
-
-                print('length ${slipPro.slip.test.length}');
+                
+                for(CartItem element in cartPro.cartItem){
+                  final Item? temp=itemPro.itemID(element.itemID);
+                  if(temp==null)continue;
+                  itemsList.add(temp);
+                }
+                print('items length ${itemsList.length}');
+                 await ItemAPI().updateQuantity(itemsList);
                 print('Slip ID' + slipPro.slip.slipID);
                 await PdfInvoiceApi.generate(slipPro, itemPro, context);
                 cartPro.emptyCart();

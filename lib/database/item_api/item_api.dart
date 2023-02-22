@@ -33,4 +33,16 @@ class ItemAPI {
     }
     return value;
   }
+   Future<bool> updateQuantity(List<Item> value) async {
+    try {
+      for(int i=0;i<value.length;i++){
+
+      await collection.document(value[i].id).update(value[i].updateQuantity());
+      }
+      return true;
+    } catch (e) {
+  
+      return false;
+    }
+  }
 }

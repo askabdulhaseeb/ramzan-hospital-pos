@@ -26,7 +26,7 @@ class Item {
   final String formula;
   final String manufacturer;
   final String supplier;
-  final int quantity;
+   int quantity;
   final double averagePrice;
   final double salePrice;
   final double discount;
@@ -48,7 +48,13 @@ class Item {
       'discount': discount,
     };
   }
+  updateQuantity(){
+    return  <String, dynamic>{
+      'quantity': quantity,
+    };
+  }
 
+  // ignore: sort_constructors_first
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
       id: map['id'] ?? '',

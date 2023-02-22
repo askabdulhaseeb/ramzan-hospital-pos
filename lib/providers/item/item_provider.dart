@@ -12,7 +12,11 @@ class ItemProvider extends ChangeNotifier {
         _items.indexWhere((Item element) => element.code == codeValue);
     return index < 0 ? null : _items[index];
   }
-
+Item? itemID(String codeValue) {
+    final int index =
+        _items.indexWhere((Item element) => element.id == codeValue);
+    return index < 0 ? null : _items[index];
+  }
   String? itemName(String Value) {
     final int index = _items.indexWhere((Item element) => element.id == Value);
     return index < 0 ? null : _items[index].name;
@@ -27,15 +31,21 @@ class ItemProvider extends ChangeNotifier {
     _search = value;
     notifyListeners();
   }
-
-  String maxQuantity(String quantity, Item item) {
+bool isAvaliable=true;
+  String maxQuantity(String quantity,ItemProvider itemPro ,int index) {
     int qua = int.parse(quantity);
 
-    if (qua < item.quantity) {
-      return qua.toString();
+    if (qua < itemPro.items[index].quantity) {
+      itemPro.items[index].quantity-=qua;
+      isAvaliable=true;
+      notifyListeners();
+
     } else {
-      return item.quantity.toString();
+      isAvaliable=false;
+      notifyListeners();
+      //return itemPro.items[index].quantity.toString();
     }
+      return qua.toString();
   
   }
 
