@@ -50,33 +50,58 @@ class _ItemSupplierDropdownState extends State<ItemSupplierDropdown> {
           child: Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-              child: DropdownFormField<ItemSupplier>(
-                decoration:  InputDecoration(
-                  border: const OutlineInputBorder(),
-                  suffixIcon: const Icon(Icons.arrow_drop_down),
-                  labelText:  (supplierPro.edit) ? supplierPro.selectedSupplier==null?'Supplier' :supplierPro.selectedSupplier!.name : 'Supplier',
-                ),
-                onChanged: (dynamic str) => supplierPro.onSupplierUpdate(str),
-                validator: (dynamic str) {
-                  if (supplierPro.selectedSupplier == null) {
-                    return 'Select Supplier';
-                  }
-                  return null;
-                },
-                displayItemFn: (dynamic value) => Text(
-                  value?.name ?? '',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                findFn: (dynamic str) async => supp,
-                filterFn: (dynamic value, String str) =>
-                    value.name.toLowerCase().indexOf(str.toLowerCase()) >= 0,
-                dropdownItemFn: (dynamic value, int position, bool focused,
-                        dynamic lastSelectedItem, dynamic onTap) =>
-                    ListTile(
-                  title: Text(value.name),
-                  onTap: onTap,
-                ),
+                  child: DropdownButtonFormField<ItemSupplier>(
+                  isExpanded: true,
+                       decoration: const InputDecoration(
+                border: OutlineInputBorder(),
               ),
+                alignment: Alignment.centerLeft,
+               // value: manuPro.selectedManufacturer,
+                style: const TextStyle(color: Colors.black),
+                //underline: const SizedBox(),
+                hint: const Text(
+                  '',
+                  style: TextStyle(color: Colors.black),
+                ),
+                items: supplierPro.suppliers
+                    .map((ItemSupplier suppliers) => DropdownMenuItem<ItemSupplier>(
+                          value: suppliers,
+                          child: Text(
+                            suppliers.name.toUpperCase(),
+                            style: const TextStyle(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (ItemSupplier? value) =>
+                   supplierPro.onSupplierUpdate(value!),
+              ),
+              // child: DropdownFormField<ItemSupplier>(
+              //   decoration:  InputDecoration(
+              //     border: const OutlineInputBorder(),
+              //     suffixIcon: const Icon(Icons.arrow_drop_down),
+              //     labelText:  (supplierPro.edit) ? supplierPro.selectedSupplier==null?'Supplier' :supplierPro.selectedSupplier!.name : 'Supplier',
+              //   ),
+              //   onChanged: (dynamic str) => supplierPro.onSupplierUpdate(str),
+              //   validator: (dynamic str) {
+              //     if (supplierPro.selectedSupplier == null) {
+              //       return 'Select Supplier';
+              //     }
+              //     return null;
+              //   },
+              //   displayItemFn: (dynamic value) => Text(
+              //     value?.name ?? '',
+              //     style: const TextStyle(fontSize: 16),
+              //   ),
+              //   findFn: (dynamic str) async => supp,
+              //   filterFn: (dynamic value, String str) =>
+              //       value.name.toLowerCase().indexOf(str.toLowerCase()) >= 0,
+              //   dropdownItemFn: (dynamic value, int position, bool focused,
+              //           dynamic lastSelectedItem, dynamic onTap) =>
+              //       ListTile(
+              //     title: Text(value.name),
+              //     onTap: onTap,
+              //   ),
+              // ),
             ),
         ),
        supplierPro.edit

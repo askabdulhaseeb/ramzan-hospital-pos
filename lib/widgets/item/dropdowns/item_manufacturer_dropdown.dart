@@ -54,33 +54,32 @@ class _ItemManufacturerDropdownState extends State<ItemManufacturerDropdown> {
           child:  Padding(
               padding:
                   const EdgeInsets.only(left: 18, right: 8, top: 4, bottom: 4),
-              child: DropdownFormField<ItemManufacturer>(
-                decoration:  InputDecoration(
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.arrow_drop_down),
-                  labelText: (manuPro.edit) ? manuPro.selectedManufacturer==null?'Manufacturer' :manuPro.selectedManufacturer!.name : 'Manufacturer',
-                ),
-                onChanged: (dynamic str) => manuPro.onManufacturerUpdate(str),
-                validator: (dynamic str) {
-                  if (manuPro.selectedManufacturer == null) {
-                    return 'Select Manufacturer';
-                  }
-                  return null;
-                },
-                displayItemFn: (dynamic value) => Text(
-                  value?.name ?? '',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                findFn: (dynamic str) async => manu,
-                filterFn: (dynamic value, String str) =>
-                    value.name.toLowerCase().indexOf(str.toLowerCase()) >= 0,
-                dropdownItemFn: (dynamic value, int position, bool focused,
-                        dynamic lastSelectedItem, dynamic onTap) =>
-                    ListTile(
-                  title: Text(value.name),
-                  onTap: onTap,
-                ),
+                   child: DropdownButtonFormField<ItemManufacturer>(
+                  isExpanded: true,
+                       decoration: const InputDecoration(
+                border: OutlineInputBorder(),
               ),
+                alignment: Alignment.centerLeft,
+               // value: manuPro.selectedManufacturer,
+                style: const TextStyle(color: Colors.black),
+                //underline: const SizedBox(),
+                hint: const Text(
+                  '',
+                  style: TextStyle(color: Colors.black),
+                ),
+                items: manuPro.manufacturer
+                    .map((ItemManufacturer cats) => DropdownMenuItem<ItemManufacturer>(
+                          value: cats,
+                          child: Text(
+                            cats.name.toUpperCase(),
+                            style: const TextStyle(),
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (ItemManufacturer? value) =>
+                    manuPro.onManufacturerUpdate(value!),
+              ),
+              
             ),
         ),
       manuPro.edit
