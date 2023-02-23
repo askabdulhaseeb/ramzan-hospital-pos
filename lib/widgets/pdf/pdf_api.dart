@@ -20,7 +20,11 @@ class PdfApi {
     final File file = File('${dir.path}/$name');
     Printer? pri = await Printing.pickPrinter(context: context);
     await Printing.directPrintPdf(
-        printer: pri!, onLayout: (PdfPageFormat format) async => bytes);
+      printer: pri!,
+      onLayout: (PdfPageFormat format) async => bytes,
+      dynamicLayout: false,
+      usePrinterSettings: true,
+    );
     // List<Printer> printers = await Printing.listPrinters();
 
     // print(printers[0]);

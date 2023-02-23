@@ -15,12 +15,10 @@ class PdfInvoiceApi {
       SlipProvider slipPro, ItemProvider itemPro, context) async {
     final Document pdf = Document();
 
-    pdf.addPage(MultiPage(
-      // pageFormat: PdfPageFormat.roll57,
+    pdf.addPage(Page(
+      pageFormat: PdfPageFormat.roll80,
       // ignore: always_specify_types
-      build: (Context context) => [
-        buildPdf(slipPro, itemPro),
-      ],
+      build: (Context context) => buildPdf(slipPro, itemPro),
     ));
     return PdfApi.saveDocument(
         name: 'Ramzan Hospital', pdf: pdf, context: context);
@@ -30,7 +28,7 @@ class PdfInvoiceApi {
     return Column(children: <Widget>[
       SizedBox(
         height: 30 * PdfPageFormat.mm,
-        width: 80 * PdfPageFormat.mm,
+        width: PdfPageFormat.roll80.width,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -49,7 +47,7 @@ class PdfInvoiceApi {
 
   static Widget forTest(SlipProvider slipPro, ItemProvider itemPro) {
     return SizedBox(
-        width: 80 * PdfPageFormat.mm,
+        width: PdfPageFormat.roll80.width,
         child: ListView.builder(
           itemCount: slipPro.slip.test.length,
           itemBuilder: (Context context, int index) {
@@ -64,10 +62,9 @@ class PdfInvoiceApi {
             return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  medicines(10 * PdfPageFormat.mm, quantity.toString()),
                   medicines(25 * PdfPageFormat.mm, medicineName!),
                   medicines(15 * PdfPageFormat.mm, netTotal.toString()),
-                  medicines(15 * PdfPageFormat.mm, discount.toString()),
+                  medicines(10 * PdfPageFormat.mm, discount.toString()),
                   medicines(15 * PdfPageFormat.mm, toal.toString()),
                 ]);
           },
@@ -80,24 +77,23 @@ class PdfInvoiceApi {
 
   static SizedBox totalBill(SlipProvider slipPro) {
     return SizedBox(
-      height: 30 * PdfPageFormat.mm,
-      width: 80 * PdfPageFormat.mm,
+      width: PdfPageFormat.roll80.width - 10,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
-                width: 40 * PdfPageFormat.mm,
                 child: Text('Total Item : ${slipPro.slip.test.length}'),
               ),
               SizedBox(
-                  width: 40 * PdfPageFormat.mm,
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Text(
-                        'Net Total: ${slipPro.slip.totalbill + slipPro.slip.adjustment}'),
-                  ])),
+                Text(
+                    'Net Total: ${slipPro.slip.totalbill + slipPro.slip.adjustment}'),
+              ])),
             ],
           ),
           Text('Discount: ${slipPro.slip.customerDiscount}'),
@@ -111,18 +107,16 @@ class PdfInvoiceApi {
   static SizedBox bottomWidget() {
     return SizedBox(
       //height: 15 * PdfPageFormat.mm,
-      width: 80 * PdfPageFormat.mm,
+      width: PdfPageFormat.roll80.width,
       child: Column(children: <Widget>[
-        SizedBox(
-          child: Column(
-            children: <Widget>[
-              Text(
-                'Return policy',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'Return policy Return policy ',
-                style: TextStyle(fontSize: 10),
+        RichText(
+          text: TextSpan(
+            text: 'Developed By ',
+            style: const TextStyle(fontSize: 10),
+            children: <TextSpan>[
+              TextSpan(
+                text: 'Dev Markaz',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
               ),
             ],
           ),
@@ -134,18 +128,6 @@ class PdfInvoiceApi {
             children: <TextSpan>[
               TextSpan(
                 text: '+92 345 102 1122',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-              ),
-            ],
-          ),
-        ),
-        RichText(
-          text: TextSpan(
-            text: 'Developed By ',
-            style: const TextStyle(fontSize: 10),
-            children: <TextSpan>[
-              TextSpan(
-                text: 'Dev Markaz',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
               ),
             ],
@@ -180,11 +162,11 @@ class PdfInvoiceApi {
     //   Text('usman'),
     //   Text('usman'),
     // ]);
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            width: 50 * PdfPageFormat.mm,
+            width: PdfPageFormat.roll80.width - 10,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -193,7 +175,7 @@ class PdfInvoiceApi {
                 ]),
           ),
           SizedBox(
-            width: 30 * PdfPageFormat.mm,
+            width: PdfPageFormat.roll80.width - 10,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

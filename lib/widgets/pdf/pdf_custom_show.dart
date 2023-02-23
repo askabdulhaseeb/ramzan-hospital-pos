@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 
 class PdfCustomShow extends StatelessWidget {
   const PdfCustomShow({super.key});
@@ -47,7 +48,7 @@ class PdfCustomShow extends StatelessWidget {
   Widget customerDetail() {
     return SizedBox(
       height: 70,
-      width: 342,
+      width: PdfPageFormat.roll80.width,
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -101,7 +102,7 @@ class PdfCustomShow extends StatelessWidget {
   Widget total() {
     return SizedBox(
       height: 90,
-      width: 342,
+      width: PdfPageFormat.roll80.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

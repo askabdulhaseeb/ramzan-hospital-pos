@@ -148,7 +148,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     }
                                   },
                                   style: ButtonStyle(
-                                    iconColor:
+                                    foregroundColor:
                                         MaterialStateProperty.all(Colors.white),
                                     backgroundColor:
                                         MaterialStateProperty.all(Colors.blue),
