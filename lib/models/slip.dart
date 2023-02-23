@@ -4,7 +4,7 @@ import 'item/cart_item.dart';
 
 
 class Slip {
-  factory Slip.fromDataBase(Map<String, dynamic> data, BuildContext context) {
+  factory Slip.fromDataBase(Map<String, dynamic> data) {
     return Slip(
       slipID: data['slip_id'] ?? 'null',
       isPaid: data['is_paid']?? false,

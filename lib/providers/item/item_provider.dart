@@ -36,7 +36,6 @@ bool isAvaliable=true;
     int qua = int.parse(quantity);
 
     if (qua < itemPro.items[index].quantity) {
-      itemPro.items[index].quantity-=qua;
       isAvaliable=true;
       notifyListeners();
 
@@ -45,6 +44,7 @@ bool isAvaliable=true;
       notifyListeners();
       //return itemPro.items[index].quantity.toString();
     }
+      itemPro.items[index].quantity-=qua;
       return qua.toString();
   
   }

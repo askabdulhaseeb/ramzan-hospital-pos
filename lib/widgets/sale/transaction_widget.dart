@@ -69,12 +69,35 @@ class TransactionsSearch extends StatelessWidget {
                         Text(transactions[index].remainingBill.toString())
                       ],
                     ),
-                    trailing: ElevatedButton(
-                      onPressed: () {},
-                      child: transactions[index].remainingBill == 0
-                          ? const Text('Paid')
-                          : const Text('Remaing'),
-                    ),
+                    trailing: transactions[index].remainingBill==0?SizedBox(
+                      width: 80,
+                      child: const Text('Paid')):Builder(
+                        builder: (context) => 
+                         ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                         showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Second Dialog'),
+                      content: Text('This is the second dialog.'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+                      
+                        },
+                        child:  const Text('Remaing'),
+                                          ),
+                      ),
                   ),
                 ),
               );

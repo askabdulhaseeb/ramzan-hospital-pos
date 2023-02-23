@@ -16,4 +16,13 @@ class SlipAPI {
     }
     return res;
   }
+  Future<List<Slip>> get() async {
+    List<Slip> slips = <Slip>[];
+    List<Document> lis =
+        (await collection.orderBy('timestamp', descending: true).get());
+    for (int i = 0; i < lis.length; i++) {
+      slips.add(Slip.fromDataBase(lis[i].map));
+    }
+    return slips;
+  }
 }
