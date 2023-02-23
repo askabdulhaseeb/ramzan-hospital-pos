@@ -25,4 +25,16 @@ class SlipAPI {
     }
     return slips;
   }
+  Future<bool> updateQuantity(Slip value) async {
+    try {
+      
+
+      await collection.document(value.slipID).update(value.updateQuantity(value));
+      
+      return true;
+    } catch (e) {
+  
+      return false;
+    }
+  }
 }

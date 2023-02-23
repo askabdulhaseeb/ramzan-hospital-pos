@@ -9,6 +9,32 @@ import '../models/slip.dart';
 import '../models/transaction.dart';
 
 class SlipProvider with ChangeNotifier {
+
+   SlipProvider() {
+    loadData();
+  }
+  List<Slip> _slipList = [];
+  List<Slip> get slipList => _slipList;
+
+  Future<void> loadData() async {
+    _slipList = await SlipAPI().get();
+    notifyListeners();
+  }
+    List<Slip> searchUser(String userId) {
+    List<Slip> temp = [];
+    for (int i = 0; i < _slipList.length; i++) {
+      if (userId == _slipList[i].patientID) {
+        temp.add(_slipList[i]);
+      }
+    }
+
+    return temp;
+  }
+  Slip getSlip(String id){
+    int index= _slipList.indexWhere((Slip element) => element.slipID==id);
+    return index<0? _null:slipList[index];
+  }
+  Slip _null=Slip(slipID: '', patientID: '', totalbill: 0, customerDiscount:0, adjustment: 0, amountPaid: 0, isPaid: false, test: []);
   Future<void> addslip(String patientID, double totalbill, List<CartItem> test,
       double customerDiscount, double adjustment, double amountPaid) async {
     bool isPaid = false;

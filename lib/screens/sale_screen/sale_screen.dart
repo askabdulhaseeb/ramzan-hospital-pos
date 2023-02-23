@@ -2,11 +2,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/slip.dart';
 import '../../models/transaction.dart';
 import '../../providers/cart_provider.dart';
 import '../../providers/item/item_provider.dart';
 import '../../providers/patient_provider.dart';
 import '../../providers/sale_provider.dart';
+import '../../providers/slip_provider.dart';
 import '../../providers/transaction_provider.dart';
 import '../../providers/user_provider.dart';
 import '../../utilities/custom_validator.dart';
@@ -205,14 +207,15 @@ class _SaleScreenState extends State<SaleScreen> {
                             ),
                           );
                         }),
-                        Consumer2<PatientProvider, TransactionProvider>(builder:
+                        Consumer2<PatientProvider, SlipProvider>(builder:
                             (BuildContext context,
                                 PatientProvider patientpro,
-                                TransactionProvider transactionPro,
+                                SlipProvider slipPro,
                                 Widget? snapshot) {
                            //transactionPro.loadData();
-                          List<Transaction> transactions = transactionPro
+                          List<Slip> slips = slipPro
                               .searchUser(patientpro.selectedpatient.patientID);
+                              
                           return patientpro.selectedpatient.name == 'unknown'
                               ? const SizedBox()
                               : Row(
@@ -257,8 +260,7 @@ class _SaleScreenState extends State<SaleScreen> {
                                                         //child: AddPatientUi(),
                                                         child:
                                                             TransactionsSearch(
-                                                          transactions:
-                                                              transactions,
+                                                         slips: slips,
                                                         ),
                                                       );
                                                     },

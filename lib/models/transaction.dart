@@ -45,5 +45,10 @@ class Transaction {
     );
   }
 
- 
+  // amountUpdate(Transaction value){
+  //   return  <String, dynamic>{
+  //     'amountPaid': value.amountPaid,
+  //     'remainingBill':value.remainingBill,
+  //   };
+  // }
 }

@@ -5,6 +5,12 @@ import 'item/cart_item.dart';
 
 class Slip {
   factory Slip.fromDataBase(Map<String, dynamic> data) {
+    List<CartItem> test=[];
+     if (data['test'] != null) {
+      data['test'].forEach((dynamic e) {
+        test.add(CartItem.fromMap(e));
+      });
+    }
     return Slip(
       slipID: data['slip_id'] ?? 'null',
       isPaid: data['is_paid']?? false,
@@ -15,7 +21,7 @@ class Slip {
      adjustment: data['adjustment'] ?? 0,
      // test: CartItem.fromMap((data['test'] ?? <dynamic>[])),
       timestamp: data['timestamp'] ?? 0,
-      test: List<CartItem>.from(data['test'] ?? <CartItem>[]),
+      test: test,
     );
   }
   Slip({
@@ -37,8 +43,8 @@ class Slip {
   final double totalbill;
   final double customerDiscount;
   final double adjustment;
-  final double amountPaid;
-  final bool isPaid;
+  double amountPaid;
+   bool isPaid;
   final List<CartItem> test;
   final int? timestamp;
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -53,4 +59,10 @@ class Slip {
         'test': test.map((CartItem e) => e.toMap()).toList(),
         'timestamp': TimeStamp.timestamp,
       };
+      updateQuantity(Slip value){
+    return  <String, dynamic>{
+      'is_paid': value.isPaid,
+      'amount_paid':value.amountPaid,
+    };
+  }
 }

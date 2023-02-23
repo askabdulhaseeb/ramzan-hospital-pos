@@ -24,4 +24,16 @@ class TransactionAPI {
     }
     return transactions;
   }
+  //  Future<bool> updateTransaction(Transaction value) async {
+  //   try {
+      
+
+  //     await collection.document(value.transactionId).update(value.amountUpdate(amountPaid, remaing));
+      
+  //     return true;
+  //   } catch (e) {
+  
+  //     return false;
+  //   }
+  // }
 }
